@@ -45,6 +45,7 @@ public class PatientWorkAreaJPanel extends javax.swing.JPanel {
         patientId.setText(userAccount.getCus().getPatientId());
         patientName.setText(userAccount.getCus().getPatientFirstName()+" "+userAccount.getCus().getPatientLastName());
         populateTable();
+        populateInsTable();
     }
     public void populateTable() {
         DefaultTableModel model = (DefaultTableModel) workRequestJTable.getModel();
@@ -92,7 +93,7 @@ public class PatientWorkAreaJPanel extends javax.swing.JPanel {
     }
     
     public void populateInsTable() {
-        DefaultTableModel model = (DefaultTableModel) workRequestJTable.getModel();
+        DefaultTableModel model = (DefaultTableModel) insTable.getModel();
         model.setRowCount(0);
         for(Network net:ecoSystem.getNetworks()){
             for(Enterprise enter: net.getEnterpriseDirectory().getEnterpriseList()){
@@ -104,7 +105,7 @@ public class PatientWorkAreaJPanel extends javax.swing.JPanel {
                         {
                             for (WorkRequest request : org.getWorkQueue().getWorkRequests()) 
                             {
-                                if(((InsuranceWorkRequest) request).getInsuranceCustomer().getSsn().equals(userAccount.getCus().getSsn()))
+                                if(((InsuranceWorkRequest) request).getSsn().equals(userAccount.getCus().getSsn()))
                                 {
                                     String status = request.getStatus();
                                     Object[] row = new Object[5];
@@ -112,7 +113,7 @@ public class PatientWorkAreaJPanel extends javax.swing.JPanel {
                                     row[1] = status;
                                     row[2] = ((InsuranceWorkRequest) request).getBillAmount();
                                     row[3] = ((InsuranceWorkRequest) request).getClaimAmount();
-                                    row[4] = ((InsuranceWorkRequest) request).getPolicyNumber();
+                                    row[4] = ((InsuranceWorkRequest) request).getAgent();
                                     model.addRow(row);
                                 }
                             }
@@ -142,7 +143,7 @@ public class PatientWorkAreaJPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         patientName = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        insTable = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(77, 154, 115));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -156,9 +157,17 @@ public class PatientWorkAreaJPanel extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Reason", "Status", "Amount", "Policy Number", "Doctor Name"
+                "Reason", "Status", "Amount", "Policy Number", "Assigned Doctor"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(workRequestJTable);
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, 638, 130));
@@ -181,8 +190,8 @@ public class PatientWorkAreaJPanel extends javax.swing.JPanel {
         patientName.setForeground(new java.awt.Color(255, 255, 255));
         add(patientName, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 20, 170, 30));
 
-        jTable1.setBackground(new java.awt.Color(153, 255, 153));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        insTable.setBackground(new java.awt.Color(153, 255, 153));
+        insTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -190,7 +199,7 @@ public class PatientWorkAreaJPanel extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Request", "Status", "Bill Amount", "Claim Amount", "Policy Number"
+                "Policy Number", "Status", "Bill Amount", "Claim Amount", "Assigned Agent"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -201,18 +210,18 @@ public class PatientWorkAreaJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(insTable);
 
         add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 640, 130));
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable insTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel patientId;
     private javax.swing.JLabel patientName;
     private javax.swing.JTable workRequestJTable;
