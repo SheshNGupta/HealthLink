@@ -705,7 +705,7 @@ public class CreateAppointmentJPanel extends javax.swing.JPanel {
 
     private void btnFindPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindPatientActionPerformed
 
-        btnCreate.setEnabled(false);
+        //btnCreate.setEnabled(false);
         btnUpdate.setEnabled(true);
         boolean isPatientFound = false;
         String ssn = txtPatientSSN.getText().trim();
@@ -995,7 +995,7 @@ public class CreateAppointmentJPanel extends javax.swing.JPanel {
 
         txtPatientIdentifier.setText(patientId);
 
-        lblPolicyNum.setEnabled(false);
+        //lblPolicyNum.setEnabled(false);
         btnFindInsurance.setEnabled(false);
         txtPolicyNum.setEnabled(false);
         txtInsuranceCompany.setEnabled(false);
@@ -1003,10 +1003,10 @@ public class CreateAppointmentJPanel extends javax.swing.JPanel {
 
         txtCoverage.setEnabled(false);
 
-        lblCoverage.setEnabled(false);
-        lblInsCompany.setEnabled(false);
+        //lblCoverage.setEnabled(false);
+        //lblInsCompany.setEnabled(false);
 
-        lblPolicyName.setEnabled(false);
+        //lblPolicyName.setEnabled(false);
     }
 
     private void refresh() {
