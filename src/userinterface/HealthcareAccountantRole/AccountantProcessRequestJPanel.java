@@ -274,12 +274,6 @@ public class AccountantProcessRequestJPanel extends javax.swing.JPanel {
         double claimAmount = Double.parseDouble(txtInsuranceClaimAmount.getText());
         double billAmount = accountBillingRequest.getBillingAmount();
 
-//        txtPolicyNumber.setText(policyNumber);
-//        txtSSN.setText(ssn);
-//        txtFirstName.setText(accountBillingRequest.getPatient().getPatientFirstName());
-//        txtLastName.setText(accountBillingRequest.getPatient().getPatientLastName());
-//        txtBillAmount.setText(String.valueOf(accountBillingRequest.getBillingAmount()));
-//        txtInsurancePolicyName.setText(policyName);
 
        
             Insurance insurance = new Insurance(policyName, insuranceCompany, claimAmount);
@@ -349,6 +343,7 @@ public class AccountantProcessRequestJPanel extends javax.swing.JPanel {
 
     private void btnCOllectCashActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCOllectCashActionPerformed
         accountBillingRequest.setStatus("Patient Transaction Completed");
+        accountBillingRequest.getPatient().setIsTreatmentComplete(true);
         JOptionPane.showMessageDialog(null, "Amount received from Patient");
         btnCOllectCash.setEnabled(false);
     }//GEN-LAST:event_btnCOllectCashActionPerformed
