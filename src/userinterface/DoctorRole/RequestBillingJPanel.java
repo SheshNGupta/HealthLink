@@ -322,14 +322,15 @@ public class RequestBillingJPanel extends javax.swing.JPanel {
             int dialogResult = JOptionPane.showConfirmDialog(null, "Do you want to proceed?");
             if (dialogResult == JOptionPane.YES_OPTION) {
                 patientTreatmentWorkRequest.setStatus("Consultation Completed");
+                patientTreatmentWorkRequest.setBillAmount(billingAmount);
 
                 AccountantBillingRequest accountantBillingRequest = new AccountantBillingRequest();
                 accountantBillingRequest.setBillingAmount(billingAmount);
-                //  accountantBillingRequest.setPatientId(Integer.parseInt(txtPatientId.getText()));
 
                 accountantBillingRequest.setSender(userAccount);
                 accountantBillingRequest.setStatus("Sent");
                 accountantBillingRequest.setPatient(patientTreatmentWorkRequest.getPatient());
+                accountantBillingRequest.setVisitRequest(patientTreatmentWorkRequest);
 
                 Organization org = null;
                 for (Organization organization : enterprise.getOrganizationDirectory().getOrganizations()) {

@@ -321,6 +321,7 @@ public class AccountantProcessRequestJPanel extends javax.swing.JPanel {
                 userAccount.getWorkQueue().getWorkRequests().add(insuranceWorkRequest);
                 accountBillingRequest.setStatus("Patient Transaction Completed");
                 accountBillingRequest.getPatient().setIsTreatmentComplete(true);
+                accountBillingRequest.getVisitRequest().setIsComplete(true);
                 JOptionPane.showMessageDialog(null, "Money received from patient: " + payableAmount+". Insurance Claim Request Raised Successfully for amount:" + claimAmount);
            btnSendRequestForInsurance.setEnabled(false);
             }
@@ -344,6 +345,7 @@ public class AccountantProcessRequestJPanel extends javax.swing.JPanel {
     private void btnCOllectCashActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCOllectCashActionPerformed
         accountBillingRequest.setStatus("Patient Transaction Completed");
         accountBillingRequest.getPatient().setIsTreatmentComplete(true);
+        accountBillingRequest.getVisitRequest().setIsComplete(true);
         JOptionPane.showMessageDialog(null, "Amount received from Patient");
         btnCOllectCash.setEnabled(false);
     }//GEN-LAST:event_btnCOllectCashActionPerformed

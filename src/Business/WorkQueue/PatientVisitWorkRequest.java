@@ -24,6 +24,7 @@ public class PatientVisitWorkRequest extends WorkRequest {
     private String prescription;
     private double billAmount;
     private UserAccount assignedDoctor;
+    private boolean isComplete;
 
     public PatientVisitWorkRequest(String Date, String reasonForVisit, Patient patient) {
         this.registrationDate = Date;
@@ -116,4 +117,12 @@ public class PatientVisitWorkRequest extends WorkRequest {
         return reasonForVisit;
     }
 
+    public boolean isIsComplete() {
+        return isComplete;
+    }
+
+    public void setIsComplete(boolean isComplete) {
+        this.isComplete = isComplete;
+    }
+       
 }

@@ -52,7 +52,7 @@ public class PatientWorkAreaJPanel extends javax.swing.JPanel {
         model.setRowCount(0);
         for(Network net:ecoSystem.getNetworks()){
             for(Enterprise enter: net.getEnterpriseDirectory().getEnterpriseList()){
-                if (enter instanceof HealthCenterEnterprise)
+                if ((enter instanceof HealthCenterEnterprise)&&(net.getZip()==enter.getZipcode()))
                 {
                     for (Organization org : enter.getOrganizationDirectory().getOrganizations()) 
                     {

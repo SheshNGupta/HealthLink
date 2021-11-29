@@ -384,8 +384,8 @@ public class CreateAppointmentJPanel extends javax.swing.JPanel {
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Email:");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(765, 213, -1, -1));
-        add(emailTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(804, 211, 153, -1));
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 210, -1, -1));
+        add(emailTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 200, 200, 30));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
@@ -609,12 +609,14 @@ public class CreateAppointmentJPanel extends javax.swing.JPanel {
 
             Insurance insurance = new Insurance(policyName, insuranceCompany, coverage);
             InsuranceCustomer insuranceCustomer = new InsuranceCustomer(insurance, policyNumber);
-
+            PatientVisitWorkRequest patientTreatmentWorkRequest;
             HealthCenterEnterprise healthCenterEnterprise = (HealthCenterEnterprise) enterprise;
+            if(cus==null)
+            {
             Patient patient = new Patient();
             
             patient.setAppointmentDate(txtDate.getText());
-            patient.setPatientId(patientId);
+            patient.setPatientId(txtPatientIdentifier.getText().trim());
             patient.setPatientFirstName(firstName);
             patient.setPatientLastName(lastName);
             patient.setSex(gender);
@@ -629,6 +631,8 @@ public class CreateAppointmentJPanel extends javax.swing.JPanel {
 
             healthCenterEnterprise.getPatientDirectory().getPatients().add(patient);
             //creating user account
+            //if(cus==null)
+            //{
             if (userName == null || userName.equals("")) {
             nameJTextField.setBorder(BorderFactory.createLineBorder(Color.RED));
             JOptionPane.showMessageDialog(null, "Username cannot be empty");
@@ -668,9 +672,12 @@ public class CreateAppointmentJPanel extends javax.swing.JPanel {
         }
             UserAccount userAccount = ecosystem.getUserAccountDirectory().createUserAccount(userName, password, patient, new PatientRole());
             patient.setUserAccount(userAccount);
-            
-            PatientVisitWorkRequest patientTreatmentWorkRequest = new PatientVisitWorkRequest(registrationDate, reasonForVisit, patient);
-            patientTreatmentWorkRequest.setStatus("Waiting for Doctor");
+            patientTreatmentWorkRequest = new PatientVisitWorkRequest(registrationDate, reasonForVisit, patient);
+        }   //create user ends 
+            else{
+                patientTreatmentWorkRequest = new PatientVisitWorkRequest(registrationDate, reasonForVisit, cus);
+            }
+            patientTreatmentWorkRequest.setStatus("Waiting for Doctor");            
             //   patientTreatmentWorkRequest.setSender(userAccount);
 
             Organization org = null;

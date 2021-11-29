@@ -19,7 +19,7 @@ public class AccountantBillingRequest extends WorkRequest {
 
     private boolean hasInsurance;
     private boolean isInsuranceClaimSettled;
-
+    private PatientVisitWorkRequest visitRequest;
     Patient patient;
 
     public double getBillingAmount() {
@@ -59,4 +59,12 @@ public class AccountantBillingRequest extends WorkRequest {
         return String.valueOf(billingAmount);
     }
 
+    public PatientVisitWorkRequest getVisitRequest() {
+        return visitRequest;
+    }
+
+    public void setVisitRequest(PatientVisitWorkRequest visitRequest) {
+        this.visitRequest = visitRequest;
+    }
+    
 }
