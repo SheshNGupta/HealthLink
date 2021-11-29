@@ -20,6 +20,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import userinterface.PharmaManagerRole.SendEmailJPanel;
 
 /**
  *
@@ -67,6 +68,7 @@ public class ProcessMedicalBillingsJPanel extends javax.swing.JPanel {
         tblInsurance = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        emailBtn = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(77, 154, 115));
 
@@ -197,12 +199,24 @@ public class ProcessMedicalBillingsJPanel extends javax.swing.JPanel {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Patient Billing Table");
 
+        emailBtn.setBackground(new java.awt.Color(255, 204, 51));
+        emailBtn.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        emailBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/IconsImages/email_send.png"))); // NOI18N
+        emailBtn.setText("Send Email for Query");
+        emailBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emailBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -219,14 +233,15 @@ public class ProcessMedicalBillingsJPanel extends javax.swing.JPanel {
                                 .addGap(274, 274, 274)
                                 .addComponent(btnAssignToMe)
                                 .addGap(69, 69, 69)
-                                .addComponent(processRequestBtn)))
-                        .addGap(0, 268, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2))
+                                .addComponent(processRequestBtn))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(331, 331, 331)
+                                .addComponent(jLabel2)))
+                        .addGap(0, 268, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(331, 331, 331)
-                .addComponent(jLabel2)
+                .addGap(329, 329, 329)
+                .addComponent(emailBtn)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -251,7 +266,9 @@ public class ProcessMedicalBillingsJPanel extends javax.swing.JPanel {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(228, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addComponent(emailBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(164, 164, 164))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -321,10 +338,29 @@ public class ProcessMedicalBillingsJPanel extends javax.swing.JPanel {
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_backJButtonActionPerformed
 
+    private void emailBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailBtnActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = workRequestJTable.getSelectedRow();
+        String to;
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "Please select a row from patient billing table!");
+            return;
+        } else {
+            
+            AccountantBillingRequest ins = (AccountantBillingRequest) workRequestJTable.getValueAt(selectedRow, 5);
+            to= ins.getPatient().getEmail();
+            SendEmailJPanel emailJPanel = new SendEmailJPanel(userProcessContainer,to,"Account");
+            userProcessContainer.add("emailJPanel", emailJPanel);
+            CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+            layout.next(userProcessContainer);
+        }
+    }//GEN-LAST:event_emailBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backJButton;
     private javax.swing.JButton btnAssignToMe;
+    private javax.swing.JButton emailBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -386,6 +422,6 @@ public class ProcessMedicalBillingsJPanel extends javax.swing.JPanel {
          model.addRow(row);
             
         }
-        System.out.println("Insur"+ insuranceWorkRequests.size());
+        //System.out.println("Insur"+ insuranceWorkRequests.size());
     }
 }

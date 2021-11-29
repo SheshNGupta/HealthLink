@@ -8,9 +8,15 @@ package userinterface.HealthcareAccountantRole;
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Enterprise.HealthCenterEnterprise;
+import Business.Network.Network;
 import Business.Organization.AccountantOrganization;
+import Business.Organization.DoctorOrganization;
+import Business.Organization.Organization;
 import Business.Patient.Patient;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.AccountantBillingRequest;
+import Business.WorkQueue.PatientVisitWorkRequest;
+import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +41,8 @@ public class AccountantWorkAreaJPanel extends javax.swing.JPanel {
     private AccountantOrganization accountantOrganization;
     private Enterprise enterprise;
     private EcoSystem ecoSystem;
+    List<Patient> underTreatmentPatients = new ArrayList<>();
+    List<Patient> treatedPatients = new ArrayList<>();
 
     /**
      * Creates new form AccountantWorkAreaJPanel
@@ -72,7 +80,7 @@ public class AccountantWorkAreaJPanel extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Patient Details");
+        jLabel1.setText("Appointment Details");
 
         btnCreateAppointment.setBackground(new java.awt.Color(255, 204, 51));
         btnCreateAppointment.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -97,30 +105,30 @@ public class AccountantWorkAreaJPanel extends javax.swing.JPanel {
         tblAllPatients.setBackground(new java.awt.Color(204, 255, 153));
         tblAllPatients.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Patient Id", "Patient Name", "Phone Number", "Address", "Treatment Status", "Appointment Date"
+                "Patient Id", "Patient Name", "Phone Number", "Address", "Treatment Status", "Appointment Date", "Bill Amount"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -132,7 +140,7 @@ public class AccountantWorkAreaJPanel extends javax.swing.JPanel {
         btnReport.setBackground(new java.awt.Color(255, 204, 51));
         btnReport.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnReport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/IconsImages/chart.png"))); // NOI18N
-        btnReport.setText("Show Patient Report");
+        btnReport.setText("Show Appointment Status Report");
         btnReport.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnReportActionPerformed(evt);
@@ -205,9 +213,9 @@ public class AccountantWorkAreaJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnProcessMedicalBillingsActionPerformed
 
     private void btnReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportActionPerformed
-        List<Patient> underTreatmentPatients = new ArrayList<>();
+        /*List<Patient> underTreatmentPatients = new ArrayList<>();
         List<Patient> treatedPatients = new ArrayList<>();
-        DefaultPieDataset defaultPieDataset = new DefaultPieDataset();
+        
         List<Patient> patients = ((HealthCenterEnterprise) enterprise).getPatientDirectory().getPatients();
         for (Patient patient : patients) {
             if (patient.isIsTreatmentComplete()) {
@@ -215,12 +223,13 @@ public class AccountantWorkAreaJPanel extends javax.swing.JPanel {
             } else {
                 underTreatmentPatients.add(patient);
             }
-        }
-        defaultPieDataset.setValue("Patient still under treatment", underTreatmentPatients.size());
-        defaultPieDataset.setValue("Patient Treated Successfully", treatedPatients.size());
-        JFreeChart chart = ChartFactory.createPieChart("Patient Status Pie Chart", defaultPieDataset, true, true, true);
+        }*/
+        DefaultPieDataset defaultPieDataset = new DefaultPieDataset();
+        defaultPieDataset.setValue("In Progress", underTreatmentPatients.size());
+        defaultPieDataset.setValue("Completed Successfully", treatedPatients.size());
+        JFreeChart chart = ChartFactory.createPieChart("Appointment Status Pie Chart", defaultPieDataset, true, true, true);
         PiePlot piePlot =(PiePlot) chart.getPlot();
-        ChartFrame frame = new ChartFrame("Patient Status Pie Chart", chart);
+        ChartFrame frame = new ChartFrame("Appointment Status Pie Chart", chart);
         frame.setVisible(true);
         frame.setSize(500,500);
     }//GEN-LAST:event_btnReportActionPerformed
@@ -240,7 +249,7 @@ public class AccountantWorkAreaJPanel extends javax.swing.JPanel {
         List<Patient> patients = ((HealthCenterEnterprise) enterprise).getPatientDirectory().getPatients();
         DefaultTableModel dtm = (DefaultTableModel) tblAllPatients.getModel();
         dtm.setRowCount(0);
-        for (Patient patient : patients) {
+        /*for (Patient patient : patients) {
             Object[] row = new Object[6];
 
             row[0] = patient;
@@ -251,6 +260,56 @@ public class AccountantWorkAreaJPanel extends javax.swing.JPanel {
             row[5] = patient.getAppointmentDate();
 
             dtm.addRow(row);
+        }
+        for (WorkRequest request : accountantOrganization.getWorkQueue().getWorkRequests()) {
+            Object[] row = new Object[7];
+            String status = request.getStatus();
+            row[0] = ((AccountantBillingRequest) request).getPatient().getPatientId();
+            row[1] = ((AccountantBillingRequest) request).getPatient().getPatientFirstName() + " " + ((AccountantBillingRequest) request).getPatient().getPatientLastName();
+            row[2] = ((AccountantBillingRequest) request).getPatient().getPhoneNumber();
+            row[3] = ((AccountantBillingRequest) request).getPatient().getAddress();
+            row[4] = status.equals("Patient Transaction Completed")? "Treatment Complete" : "Treatment In Progress";
+            row[5] = ((AccountantBillingRequest) request).getPatient().getAppointmentDate();
+            row[6] = ((AccountantBillingRequest) request).getBillingAmount();
+
+            dtm.addRow(row);
+        }*/
+        //for(Network net:ecoSystem.getNetworks()){
+            //for(Enterprise enter: net.getEnterpriseDirectory().getEnterpriseList()){
+                //if ((enter instanceof HealthCenterEnterprise)&&(net.getZip()==enterprise.getZipcode()))
+                //{
+                    for (Organization org : enterprise.getOrganizationDirectory().getOrganizations()) 
+                    {
+                        if (org instanceof DoctorOrganization) 
+                        {
+                            for (WorkRequest request : org.getWorkQueue().getWorkRequests()) 
+                            {
+                                //if(((PatientVisitWorkRequest) request).getPatient().getPatientId()==userAccount.getCus().getPatientId())
+                                //{
+                                    String status = request.getStatus();
+                                    Object[] row = new Object[7];
+                                    row[0] = ((PatientVisitWorkRequest) request).getPatient().getPatientId();
+                                    row[1] = ((PatientVisitWorkRequest) request).getPatient().getPatientFirstName();
+                                    row[2] = ((PatientVisitWorkRequest) request).getPatient().getPhoneNumber();
+                                    row[3] = ((PatientVisitWorkRequest) request).getPatient().getAddress();
+                                    row[5] = ((PatientVisitWorkRequest) request).getPatient().getAppointmentDate();
+                                    row[4] = ((PatientVisitWorkRequest) request).getIsComplete()? "Treatment Complete" : "Treatment In Progress";
+                                    row[6] = ((PatientVisitWorkRequest) request).getBillAmount();
+                                    dtm.addRow(row);
+                                    if(((PatientVisitWorkRequest) request).getIsComplete())
+                                    {
+                                      treatedPatients.add(((PatientVisitWorkRequest) request).getPatient());
+                                    } else {
+                                        underTreatmentPatients.add(((PatientVisitWorkRequest) request).getPatient());
+                                    }
+                                //}
+                            }
+                        }
+                    //}
+                    
+                //}
+            //}
+            
         }
     }
 }

@@ -288,7 +288,7 @@ public class ManagerWorkAreaJPanel extends javax.swing.JPanel {
         } else {
             OrderWorkRequest request = (OrderWorkRequest) workRequestJTable.getValueAt(selectedRow, 5);
             to = request.getSender().getEmployee().getEmail();
-            SendEmailJPanel emailJPanel = new SendEmailJPanel(jPanel,to);
+            SendEmailJPanel emailJPanel = new SendEmailJPanel(jPanel,to,"Pharma");
             jPanel.add("emailJPanel", emailJPanel);
             CardLayout layout = (CardLayout) jPanel.getLayout();
             layout.next(jPanel);

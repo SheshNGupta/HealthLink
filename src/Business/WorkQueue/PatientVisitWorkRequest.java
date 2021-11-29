@@ -117,7 +117,7 @@ public class PatientVisitWorkRequest extends WorkRequest {
         return reasonForVisit;
     }
 
-    public boolean isIsComplete() {
+    public boolean getIsComplete() {
         return isComplete;
     }
 

@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import Business.Map.SendEmail;
 import java.util.List;
+import userinterface.HealthcareAccountantRole.ProcessMedicalBillingsJPanel;
 
 
 /**
@@ -23,13 +24,15 @@ import java.util.List;
 public class SendEmailJPanel extends javax.swing.JPanel {
 
     JPanel userProcessContainer;
+    private String type;
     
     /**
      * Creates new form ProcessWorkRequestJPanel
      */
-      public SendEmailJPanel(JPanel userProcessContainer, String to) {
+      public SendEmailJPanel(JPanel userProcessContainer, String to, String type) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
+        this.type = type;
         
         sendToText.setText(to);
         }
@@ -147,7 +150,16 @@ public class SendEmailJPanel extends javax.swing.JPanel {
         userProcessContainer.remove(this);
         Component[] componentArray = userProcessContainer.getComponents();
         Component component = componentArray[componentArray.length - 1];
+        if(type.equals("Pharma"))
+        {
         ManagerWorkAreaJPanel wjp = (ManagerWorkAreaJPanel) component;
+        }
+        else
+        {
+            ProcessMedicalBillingsJPanel pmj= (ProcessMedicalBillingsJPanel) component;
+            pmj.populateTable();
+            pmj.populateInsuranceClaimTable();
+        }
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_backJButtonActionPerformed
