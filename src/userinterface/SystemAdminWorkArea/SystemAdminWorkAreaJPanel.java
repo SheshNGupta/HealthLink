@@ -8,12 +8,30 @@ package userinterface.SystemAdminWorkArea;
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Network.Network;
+import Business.Organization.AccountantOrganization;
+import Business.Organization.DoctorOrganization;
+import Business.Organization.HealthOfficerOrganization;
+import Business.Organization.InsAgentOrganization;
+import Business.Organization.ManagerOrganization;
 import Business.Organization.Organization;
+import Business.WorkQueue.AccountantBillingRequest;
+import Business.WorkQueue.GovernmentFundRequest;
+import Business.WorkQueue.InsuranceWorkRequest;
+import Business.WorkQueue.OrderWorkRequest;
+import Business.WorkQueue.PatientVisitWorkRequest;
+import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
  *
@@ -93,6 +111,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         btnManageEnterprise = new javax.swing.JButton();
         btnManageAdmin = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        btnManageAdmin1 = new javax.swing.JButton();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -117,7 +136,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE)
         );
 
         jSplitPane.setLeftComponent(jPanel1);
@@ -166,6 +185,16 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("System Admin Work Area");
 
+        btnManageAdmin1.setBackground(new java.awt.Color(255, 204, 0));
+        btnManageAdmin1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnManageAdmin1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/IconsImages/report.png"))); // NOI18N
+        btnManageAdmin1.setText("View System Reports");
+        btnManageAdmin1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnManageAdmin1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -180,11 +209,13 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel2)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(47, 47, 47)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnManageNetwork, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnManageEnterprise, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnManageAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(171, Short.MAX_VALUE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnManageAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(btnManageNetwork, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnManageEnterprise, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE))
+                            .addComponent(btnManageAdmin1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(190, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,7 +232,9 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
                 .addComponent(btnManageEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnManageAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnManageAdmin1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(39, Short.MAX_VALUE))
         );
 
         jSplitPane.setRightComponent(jPanel2);
@@ -238,9 +271,158 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jTreeValueChanged
 
+    private void btnManageAdmin1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageAdmin1ActionPerformed
+        // TODO add your handling code here:
+        
+        showGraph();
+    }//GEN-LAST:event_btnManageAdmin1ActionPerformed
+
+    public void showGraph(){
+        int counttreat=0, countprogress=0,billcomplete=0,billprogress=0,labcomplete=0,labprogress=0,inscomplete=0,
+                insprogress=0,fundscomplete=0,fundsprogress=0,ordercomplete=0,orderprogress=0;
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        for(Network net:ecosystem.getNetworks()){
+            for(Enterprise enter: net.getEnterpriseDirectory().getEnterpriseList()){
+                
+                    for (Organization org : enter.getOrganizationDirectory().getOrganizations()) 
+                    {
+                        //Patient visits
+                        if (org instanceof DoctorOrganization) 
+                        {
+                            for (WorkRequest request : org.getWorkQueue().getWorkRequests()) 
+                            {
+                              if(((PatientVisitWorkRequest) request).getIsComplete())
+                              {
+                                 counttreat++; 
+                              }
+                              else
+                              {
+                                  countprogress++;
+                              }
+                              //Lab tests
+                              /*if((((PatientVisitWorkRequest) request).getLabResult().isEmpty()))
+                              {
+                                 labprogress++; 
+                              }
+                              else
+                              {
+                                  labcomplete++;
+                              }*/
+                            }
+                        }
+                        //Billing requests
+                        if (org instanceof AccountantOrganization)
+                        {
+                            for (WorkRequest request : org.getWorkQueue().getWorkRequests()) 
+                            {
+                              if(((AccountantBillingRequest) request).getStatus().equals("Patient Transaction Completed"))
+                              {
+                                 billcomplete++; 
+                              }
+                              else
+                              {
+                                 billprogress++;
+                              }
+                            }
+                        }
+                        // Insurance claims
+                        if (org instanceof InsAgentOrganization)
+                        {
+                            for (WorkRequest request : org.getWorkQueue().getWorkRequests()) 
+                            {
+                              if(((InsuranceWorkRequest) request).getStatus().equals("Insurance Claim Approved"))
+                              {
+                                 inscomplete++; 
+                              }
+                              else
+                              {
+                                 insprogress++;
+                              }
+                            }
+                        }
+                        //Funds requests
+                        if (org instanceof HealthOfficerOrganization)
+                        {
+                            for (WorkRequest request : org.getWorkQueue().getWorkRequests()) 
+                            {
+                              if(((GovernmentFundRequest) request).getStatus().equals("Accepted"))
+                              {
+                                 fundscomplete++; 
+                              }
+                              else
+                              {
+                                 fundsprogress++;
+                              }
+                            }
+                        }
+                        //Order requests
+                        if (org instanceof ManagerOrganization)
+                        {
+                            for (WorkRequest request : org.getWorkQueue().getWorkRequests()) 
+                            {
+                              if(((OrderWorkRequest) request).getStatus().equals("Accepted"))
+                              {
+                                 ordercomplete++; 
+                              }
+                              else
+                              {
+                                 orderprogress++;
+                              }
+                            }
+                        }
+                    }
+                }
+           dataset.addValue( counttreat , net.getName() , "Visit_Completed" );
+           dataset.addValue( countprogress , net.getName() , "VIsit_In_progress" );
+           dataset.addValue( billcomplete , net.getName() , "Billing_Completed" );
+           dataset.addValue( billprogress , net.getName() , "Billing_In_progress" );
+           dataset.addValue( inscomplete , net.getName() , "Claim_Completed" );
+           dataset.addValue( insprogress , net.getName() , "Claim_In_progress" );
+           dataset.addValue( fundscomplete , net.getName() , "Funds_Completed" );
+           dataset.addValue( fundsprogress , net.getName() , "Funds_In_progress" );
+           dataset.addValue( ordercomplete , net.getName() , "Orders_Completed" );
+           dataset.addValue( orderprogress , net.getName() , "Orders_In_progress" );
+           //dataset.addValue( labcomplete , net.getName() , "Lab_Completed" );
+           //dataset.addValue( labprogress , net.getName() , "Lab_In_progress" );
+           counttreat=0;
+           countprogress=0;
+           billcomplete=0;
+           billprogress=0;
+           inscomplete=0;
+           insprogress=0;
+           fundscomplete=0;
+           fundsprogress=0;
+           ordercomplete=0;
+           orderprogress=0;
+           //labcomplete=0;
+           //labprogress=0;
+        }
+        
+        final JFreeChart chart = ChartFactory.createBarChart(
+            "Overall Ecosystem Status",         // chart title
+            "WorkQueues",               // domain axis label
+            "Value",                  // range axis label
+            dataset,                  // data
+            PlotOrientation.HORIZONTAL,
+            true,                     // include legend
+            true,                     // tooltips?
+            false                     // URLs?
+        );
+        // set the range axis to display integers only...
+        final CategoryPlot plot = chart.getCategoryPlot();
+        final NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
+        rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
+        //plot chart
+        ChartFrame frame = new ChartFrame("Appointment Status bar", chart);
+        
+        frame.setVisible(true);
+        frame.setSize(1000,700);
+        //Add mouse function
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnManageAdmin;
+    private javax.swing.JButton btnManageAdmin1;
     private javax.swing.JButton btnManageEnterprise;
     private javax.swing.JButton btnManageNetwork;
     private javax.swing.JLabel jLabel1;
