@@ -282,7 +282,13 @@ public class ManageEnterprisesJPanel extends javax.swing.JPanel {
                 names.add(enterprise.getName());
                 types.add(enterprise.getEnterpriseType().toString());
             }
-            if((types.contains(type.toString())&&((type.toString().equals("Government"))||(type.toString().equals("Pharma"))))){
+            if((types.contains(type.toString())
+                    &&(
+                    (type.toString().equals("Government"))
+                    //||(type.toString().equals("Pharma"))
+                    )
+                    ))
+            {
               //if(!type.toString().equals("HealthCenter"))
               //{
                 JOptionPane.showMessageDialog(null, "Enterprise type already exists!!", "Warning!", JOptionPane.WARNING_MESSAGE);

@@ -22,8 +22,8 @@ public class OrderWorkRequest extends WorkRequest {
     private double billAmount;
     private UserAccount assignedTransport;
     private Order order;
+ 
     
-
     public OrderWorkRequest(String Date, String reasonForVisit) {
         this.registrationDate = Date;
         this.reasonForVisit = reasonForVisit;

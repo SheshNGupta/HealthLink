@@ -44,6 +44,7 @@ public class RequestOrderJPanel extends javax.swing.JPanel {
     private List<ItemList> items ;
     private EcoSystem ecosystem;
     ArrayList<String> names = new ArrayList<>();
+    String pharmaname;
 
     /**
      * Creates new form RequestLabTestJPanel
@@ -301,6 +302,7 @@ public class RequestOrderJPanel extends javax.swing.JPanel {
             List<Network> networks = ecosystem.getNetworks();
             int zip = enterprise.getZipcode();
             //Find managerorganization in same Network
+            PharmaEnterprise matchedphrma = null;
 
             for (Network network : networks) {
                 if(network.getZip()==zip)
@@ -308,19 +310,24 @@ public class RequestOrderJPanel extends javax.swing.JPanel {
                 List<Enterprise> enterprises = network.getEnterpriseDirectory().getEnterpriseList();
                 for (Enterprise enter : enterprises) {
                     if (enter instanceof PharmaEnterprise) {
-                    PharmaEnterprise pharma = (PharmaEnterprise) enter;
+                        if(enter.getName().equals(pharmaname))
+                        {
+                          matchedphrma =  (PharmaEnterprise) enter; 
+                        }
+                        }
+                    }
+                }
+            }
+                    //PharmaEnterprise pharma = (PharmaEnterprise) enter;
                     //pharma.getOrderDirectory().addOrder(order);
-                    List<Organization> organizations = enter.getOrganizationDirectory().getOrganizations();
+                    List<Organization> organizations = matchedphrma.getOrganizationDirectory().getOrganizations();
                     for (Organization organization : organizations) {
                         if (organization instanceof ManagerOrganization) {
                             org = organization;
                             break;
                             }
                            }
-                        }
-                    }
-                }
-            }
+                        
         if (org != null) {
             org.getWorkQueue().getWorkRequests().add(orderTreatmentWorkRequest);
             userAccount.getWorkQueue().getWorkRequests().add(orderTreatmentWorkRequest);
@@ -405,6 +412,7 @@ public class RequestOrderJPanel extends javax.swing.JPanel {
             items.add(newitem);
             priceTextField.setText(String.valueOf(total+itemtotal));
             names.add(menuTable.getValueAt(selectedRow, 2).toString());
+            pharmaname=menuTable.getValueAt(selectedRow, 2).toString();
             populateItemTable();
             
         }
