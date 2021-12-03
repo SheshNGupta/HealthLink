@@ -196,7 +196,7 @@ public class TreasurerProcessRequestJPanel extends javax.swing.JPanel {
         governmentFundRequest.setStatus("Accepted");
         try{
                 SendEmail.send(governmentFundRequest.getAdminEmail(),"\nHi "+governmentFundRequest.getAdminName()+","+"\n\nYour funding request for Location "+ governmentFundRequest.getLocation()+
-                        " is approved now disbursed"
+                        " is approved and now disbursed"
                 +"\n\n\nThanks\nGovenrment",sub);
             }catch(Exception ex){
                     JOptionPane.showMessageDialog(null, "Email Could not be sent due to technical issues");
@@ -243,6 +243,7 @@ public class TreasurerProcessRequestJPanel extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(null, "Email Could not be sent due to technical issues");
                     System.out.println(ex.getMessage());
                 }
+        JOptionPane.showMessageDialog(null, "Rejected!");
          messageTxt.setText("");
             btnReject.setEnabled(false);
             submitJButton.setEnabled(false);

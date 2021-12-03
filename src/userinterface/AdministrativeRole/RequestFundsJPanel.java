@@ -301,7 +301,7 @@ public class RequestFundsJPanel extends javax.swing.JPanel {
             governmentFundRequest.setSender(userAccount);
             governmentFundRequest.setStatus("Sent");
             governmentFundRequest.setAdminEmail(userAccount.getEmployee().getEmail());
-            governmentFundRequest.setAdminEmail(userAccount.getEmployee().getName());
+            governmentFundRequest.setAdminName(userAccount.getEmployee().getName());
 
             Organization org = null;
 

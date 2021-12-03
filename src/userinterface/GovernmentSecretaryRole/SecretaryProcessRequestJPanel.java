@@ -276,6 +276,7 @@ public class SecretaryProcessRequestJPanel extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(null, "Email Could not be sent due to technical issues");
                     System.out.println(ex.getMessage());
                 }
+                JOptionPane.showMessageDialog(null, "Rejected!");
                 messageTxt.setText("");
             btnReject.setEnabled(false);
             sendRequestToTreasurerBtn.setEnabled(false);
