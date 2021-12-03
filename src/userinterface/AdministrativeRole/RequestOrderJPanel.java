@@ -297,6 +297,7 @@ public class RequestOrderJPanel extends javax.swing.JPanel {
         orderTreatmentWorkRequest.setOrder(order);
         orderTreatmentWorkRequest.setReasonForVisit(res.getAddress());
         orderTreatmentWorkRequest.setBillAmount(Double.parseDouble(priceTextField.getText()));
+        orderTreatmentWorkRequest.setHospitalAdmin(userAccount);
         Organization org = null;
 
             List<Network> networks = ecosystem.getNetworks();

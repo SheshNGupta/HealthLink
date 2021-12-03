@@ -250,6 +250,8 @@ public class TransportProcessRequestJPanel extends javax.swing.JPanel {
 
     private void btnRejectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRejectActionPerformed
         String message = messageTxt.getText();
+        String sub = "Your Order is Rejected";
+        String odrderDtl = "Order Details\n*************************************************\n";
         if (message.equals("")) {
             JOptionPane.showMessageDialog(null, "Message is mandatory!");
             return;
@@ -260,6 +262,22 @@ public class TransportProcessRequestJPanel extends javax.swing.JPanel {
             
             if (dialogResult == JOptionPane.YES_OPTION) {
         orderItemRequest.setStatus("Rejected");
+        try{
+                    
+                    List<ItemList> itm = orderItemRequest.getOrder().getItems();
+                    for(ItemList i:itm)
+                    {
+                        odrderDtl=odrderDtl+"Item: "+i.getItem()+" , Quantity: "+i.getQuantity()+", Item Price: $"+i.getTotal()+"\n";
+                    }
+                    odrderDtl = odrderDtl+"*************************************************\n";
+                    odrderDtl=odrderDtl+"\n\nTotal Price: $"+orderItemRequest.getOrder().getAmount();
+                SendEmail.send(orderItemRequest.getHospitalAdmin().getEmployee().getEmail(),"\nHi "+orderItemRequest.getHospitalAdmin().getEmployee().getName()+","+"\n\nYour Order# "+ orderItemRequest.getOrder().getNumber()+
+                        " is Rejected by: "+orderItemRequest.getReceiver().getEmployee().getName()+"\nMessage: "+message
+                +"\n\n\n\n"+odrderDtl+"\n\nThanks,\n",sub);
+                }catch(Exception ex){
+                    JOptionPane.showMessageDialog(null, "Email Could not be sent due to technical issues");
+                    System.out.println(ex.getMessage());
+                }
          messageTxt.setText("");
             btnReject.setEnabled(false);
             submitJButton.setEnabled(false);
