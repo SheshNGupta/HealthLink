@@ -6,6 +6,7 @@
 package userinterface.GovernmentTreasurerRole;
 
 import Business.Enterprise.Enterprise;
+import Business.Map.SMS;
 import Business.Map.SendEmail;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.GovernmentFundRequest;
@@ -202,6 +203,14 @@ public class TreasurerProcessRequestJPanel extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(null, "Email Could not be sent due to technical issues");
                     System.out.println(ex.getMessage());
                 }
+        //Send SMS
+                try{
+                    SMS.SendSMS("+14793190560","Hi "+governmentFundRequest.getAdminName()+","+"\nYour Funds are disbursed for location: "+governmentFundRequest.getLocation()+
+                        "\n\nThanks,\nGovernment");
+                }catch (Exception e){
+                     System.out.println(e.getMessage());
+                }
+         //Send SMS end
         JOptionPane.showMessageDialog(null, "Funds Disbursed Successfully!!!");
         submitJButton.setEnabled(false);
         messageTxt.setText("");
