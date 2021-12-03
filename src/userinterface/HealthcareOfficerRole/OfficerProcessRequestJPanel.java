@@ -6,6 +6,7 @@
 package userinterface.HealthcareOfficerRole;
 
 import Business.Enterprise.Enterprise;
+import Business.Map.SendEmail;
 import Business.Organization.LabAssistantOrganization;
 import Business.Organization.Organization;
 import Business.Organization.SecretaryOrganization;
@@ -206,6 +207,7 @@ public class OfficerProcessRequestJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
 
         String message = messageTxt.getText();
+        String sub="Your Fund request is approved by Health Officer";
         if (message.equals("")) {
             JOptionPane.showMessageDialog(null, "Message is mandatory!");
             return;
@@ -219,6 +221,14 @@ public class OfficerProcessRequestJPanel extends javax.swing.JPanel {
             
             governmentFundRequest.setSender(userAccount);
             governmentFundRequest.setStatus("Sent to Secretary");
+            try{
+                SendEmail.send(governmentFundRequest.getAdminEmail(),"\nHi "+governmentFundRequest.getAdminName()+","+"\n\nYour funding request for Location "+ governmentFundRequest.getLocation()+
+                        " is approved by Health Officer: "+userAccount.getEmployee().getName()
+                +"\n\n\nThanks\nGovenrment",sub);
+            }catch(Exception ex){
+                    JOptionPane.showMessageDialog(null, "Email Could not be sent due to technical issues");
+                    System.out.println(ex.getMessage());
+                }
 
             Organization org = null;
             for (Organization organization : enterprise.getOrganizationDirectory().getOrganizations()) {
@@ -243,6 +253,7 @@ public class OfficerProcessRequestJPanel extends javax.swing.JPanel {
 
     private void btnRejectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRejectActionPerformed
         String message = messageTxt.getText();
+        String sub="Your Fund request is approved by Health Officer";
         if (message.equals("")) {
             JOptionPane.showMessageDialog(null, "Message is mandatory!");
             return;
@@ -253,6 +264,13 @@ public class OfficerProcessRequestJPanel extends javax.swing.JPanel {
             
             if (dialogResult == JOptionPane.YES_OPTION) {
                 governmentFundRequest.setStatus("Rejected");
+                try{
+                SendEmail.send(governmentFundRequest.getAdminEmail(),"\nHi "+governmentFundRequest.getAdminName()+","+"\n\nYour funding request for Location "+ governmentFundRequest.getLocation()+
+                        " is Rejected by Secretary: "+userAccount.getEmployee().getName()+"\n\n\n Message: "+message+"\n\n\nThanks\nGovenrment",sub);
+            }catch(Exception ex){
+                    JOptionPane.showMessageDialog(null, "Email Could not be sent due to technical issues");
+                    System.out.println(ex.getMessage());
+                }
                 messageTxt.setText("");
             btnReject.setEnabled(false);
             sendRequestToSecretaryBtn.setEnabled(false);

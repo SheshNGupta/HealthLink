@@ -6,6 +6,7 @@
 package userinterface.GovernmentTreasurerRole;
 
 import Business.Enterprise.Enterprise;
+import Business.Map.SendEmail;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.GovernmentFundRequest;
 import Business.WorkQueue.LabTestWorkRequest;
@@ -182,6 +183,7 @@ public class TreasurerProcessRequestJPanel extends javax.swing.JPanel {
     private void submitJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitJButtonActionPerformed
         submitJButton.setEnabled(true);
         String message = messageTxt.getText();
+        String sub="Your Fund request is Disbursed";
         if (message.equals("")) {
             JOptionPane.showMessageDialog(null, "Message is mandatory!");
             return;
@@ -192,6 +194,14 @@ public class TreasurerProcessRequestJPanel extends javax.swing.JPanel {
          int dialogResult = JOptionPane.showConfirmDialog(null, "Do you want to proceed?");
          if (dialogResult == JOptionPane.YES_OPTION) {
         governmentFundRequest.setStatus("Accepted");
+        try{
+                SendEmail.send(governmentFundRequest.getAdminEmail(),"\nHi "+governmentFundRequest.getAdminName()+","+"\n\nYour funding request for Location "+ governmentFundRequest.getLocation()+
+                        " is approved now disbursed"
+                +"\n\n\nThanks\nGovenrment",sub);
+            }catch(Exception ex){
+                    JOptionPane.showMessageDialog(null, "Email Could not be sent due to technical issues");
+                    System.out.println(ex.getMessage());
+                }
         JOptionPane.showMessageDialog(null, "Funds Disbursed Successfully!!!");
         submitJButton.setEnabled(false);
         messageTxt.setText("");
@@ -215,6 +225,7 @@ public class TreasurerProcessRequestJPanel extends javax.swing.JPanel {
 
     private void btnRejectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRejectActionPerformed
         String message = messageTxt.getText();
+        String sub="Your Fund request is Rejected by Treasurer";
         if (message.equals("")) {
             JOptionPane.showMessageDialog(null, "Message is mandatory!");
             return;
@@ -225,6 +236,13 @@ public class TreasurerProcessRequestJPanel extends javax.swing.JPanel {
             
             if (dialogResult == JOptionPane.YES_OPTION) {
         governmentFundRequest.setStatus("Rejected");
+        try{
+                SendEmail.send(governmentFundRequest.getAdminEmail(),"\nHi "+governmentFundRequest.getAdminName()+","+"\n\nYour funding request for Location "+ governmentFundRequest.getLocation()+
+                        " is Rejected by: "+governmentFundRequest.getReceiver().getEmployee().getName()+"\n\n\n Message: "+message+"\n\n\nThanks\nGovenrment",sub);
+            }catch(Exception ex){
+                    JOptionPane.showMessageDialog(null, "Email Could not be sent due to technical issues");
+                    System.out.println(ex.getMessage());
+                }
          messageTxt.setText("");
             btnReject.setEnabled(false);
             submitJButton.setEnabled(false);

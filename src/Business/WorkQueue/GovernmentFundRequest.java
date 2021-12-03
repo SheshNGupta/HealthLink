@@ -14,6 +14,8 @@ public class GovernmentFundRequest extends WorkRequest {
     private String location;
     private int population;
     private double requestAmount;
+    private String adminEmail;
+    private String adminName;
 
     public GovernmentFundRequest(String location, int population, double requestAmount) {
         this.location = location;
@@ -49,6 +51,22 @@ public class GovernmentFundRequest extends WorkRequest {
 
     public void setRequestAmount(double requestAmount) {
         this.requestAmount = requestAmount;
+    }
+
+    public String getAdminEmail() {
+        return adminEmail;
+    }
+
+    public void setAdminEmail(String adminEmail) {
+        this.adminEmail = adminEmail;
+    }
+
+    public String getAdminName() {
+        return adminName;
+    }
+
+    public void setAdminName(String adminName) {
+        this.adminName = adminName;
     }
 
 }
