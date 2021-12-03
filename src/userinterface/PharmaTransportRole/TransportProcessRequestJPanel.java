@@ -8,11 +8,14 @@ package userinterface.PharmaTransportRole;
 import userinterface.GovernmentTreasurerRole.*;
 import Business.Enterprise.Enterprise;
 import Business.Map.MapViewer;
+import Business.Map.SendEmail;
+import Business.Order.ItemList;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.OrderWorkRequest;
 import Business.WorkQueue.LabTestWorkRequest;
 import java.awt.CardLayout;
 import java.awt.Component;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -196,6 +199,8 @@ public class TransportProcessRequestJPanel extends javax.swing.JPanel {
     private void submitJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitJButtonActionPerformed
         submitJButton.setEnabled(true);
         String message = messageTxt.getText();
+        String sub = "Your Order is delivered";
+        String odrderDtl = "Order Details\n*************************************************\n";
         if (message.equals("")) {
             JOptionPane.showMessageDialog(null, "Message is mandatory!");
             return;
@@ -206,7 +211,23 @@ public class TransportProcessRequestJPanel extends javax.swing.JPanel {
          int dialogResult = JOptionPane.showConfirmDialog(null, "Do you want to proceed?");
          if (dialogResult == JOptionPane.YES_OPTION) {
         orderItemRequest.setStatus("Accepted");
-        JOptionPane.showMessageDialog(null, "Funds Disbursed Successfully!!!");
+        try{
+                    
+                    List<ItemList> itm = orderItemRequest.getOrder().getItems();
+                    for(ItemList i:itm)
+                    {
+                        odrderDtl=odrderDtl+"Item: "+i.getItem()+" , Quantity: "+i.getQuantity()+", Item Price: $"+i.getTotal()+"\n";
+                    }
+                    odrderDtl = odrderDtl+"*************************************************\n";
+                    odrderDtl=odrderDtl+"\n\nTotal Price: $"+orderItemRequest.getOrder().getAmount();
+                SendEmail.send(orderItemRequest.getHospitalAdmin().getEmployee().getEmail(),"\nHi "+orderItemRequest.getHospitalAdmin().getEmployee().getName()+","+"\n\nYour Order# "+ orderItemRequest.getOrder().getNumber()+
+                        " is delivered by: "+orderItemRequest.getReceiver().getEmployee().getName()
+                +"\n\n\n\n"+odrderDtl+"\n\nThanks,\n",sub);
+                }catch(Exception ex){
+                    JOptionPane.showMessageDialog(null, "Email Could not be sent due to technical issues");
+                    System.out.println(ex.getMessage());
+                }
+        JOptionPane.showMessageDialog(null, "Order Delivered Successfully!!!");
         submitJButton.setEnabled(false);
         messageTxt.setText("");
         btnReject.setEnabled(false);
