@@ -347,6 +347,9 @@ public class RequestOrderJPanel extends javax.swing.JPanel {
                     }
                     odrderDtl = odrderDtl+"*************************************************\n";
                     odrderDtl=odrderDtl+"\n\nTotal Price: $"+orderTreatmentWorkRequest.getOrder().getAmount();
+                    SendEmail.send(res.getEmail(),"\nHi "+res.getName()+","+"\n\nYour Order# "+ orderTreatmentWorkRequest.getOrder().getNumber()+
+                        " is placed "
+                +"\n\n\n\n"+odrderDtl+"\n\nThanks,\n"+pharmaname+" Team",sub);
                 //SendEmail.send("shesh.cool@gmail.com ","Shesh"+","+"\n\nYour Order# "+ orderTreatmentWorkRequest.getOrder().getNumber()+" is placed ",sub);
                 }catch(Exception ex){
                     JOptionPane.showMessageDialog(null, "Email Could not be sent due to technical issues");
