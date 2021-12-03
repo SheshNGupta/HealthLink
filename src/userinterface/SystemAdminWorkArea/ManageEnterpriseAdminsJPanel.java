@@ -362,6 +362,9 @@ public class ManageEnterpriseAdminsJPanel extends javax.swing.JPanel {
             passwordJPasswordField.setText("");
             reEnterPasswordJPasswordField.setText("");
             usernameJTextField.setText("");
+            //Added dialog box -- nikita
+            JOptionPane.showMessageDialog(null, "Successfully created User Account!!");
+            // Dialog box ends -- nikita
         }
 
     }//GEN-LAST:event_submitJButtonActionPerformed
