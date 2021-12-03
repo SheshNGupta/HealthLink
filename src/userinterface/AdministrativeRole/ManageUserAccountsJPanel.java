@@ -355,6 +355,9 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
             passwordJTextField.setText("");
             rePasswordJTextField.setText("");
             nameJTextField.setText("");
+            //Added dialog box -- nikita
+            JOptionPane.showMessageDialog(null, "Successfully created User Account!!");
+            // Dialog box ends -- nikita
         }
     }//GEN-LAST:event_createUserJButtonActionPerformed
 
