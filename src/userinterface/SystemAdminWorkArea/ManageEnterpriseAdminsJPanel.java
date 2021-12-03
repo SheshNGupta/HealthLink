@@ -362,6 +362,8 @@ public class ManageEnterpriseAdminsJPanel extends javax.swing.JPanel {
             passwordJPasswordField.setText("");
             reEnterPasswordJPasswordField.setText("");
             usernameJTextField.setText("");
+            
+            JOptionPane.showMessageDialog(null, "Enterprise Added Successfully!!");
         }
 
     }//GEN-LAST:event_submitJButtonActionPerformed

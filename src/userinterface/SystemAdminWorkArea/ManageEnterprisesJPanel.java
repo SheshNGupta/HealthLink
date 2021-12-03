@@ -315,6 +315,7 @@ public class ManageEnterprisesJPanel extends javax.swing.JPanel {
                     nameJTextField.setText("");
                     addressTextField.setText("");
                 }
+                
             }
         }
 

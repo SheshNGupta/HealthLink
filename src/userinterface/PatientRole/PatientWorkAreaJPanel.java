@@ -17,6 +17,7 @@ import Business.UserAccount.UserAccount;
 import Business.WorkQueue.InsuranceWorkRequest;
 import Business.WorkQueue.PatientVisitWorkRequest;
 import Business.WorkQueue.WorkRequest;
+import java.awt.CardLayout;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -35,15 +36,16 @@ public class PatientWorkAreaJPanel extends javax.swing.JPanel {
     EcoSystem ecoSystem;
    
     
-
     public PatientWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Enterprise enterprise,EcoSystem business) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.enterprise = enterprise;
         this.userAccount = account;
         this.ecoSystem = business;
+        
         patientId.setText(userAccount.getCus().getPatientId());
         patientName.setText(userAccount.getCus().getPatientFirstName()+" "+userAccount.getCus().getPatientLastName());
+        
         populateTable();
         populateInsTable();
     }
@@ -144,6 +146,8 @@ public class PatientWorkAreaJPanel extends javax.swing.JPanel {
         patientName = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         insTable = new javax.swing.JTable();
+        btnprescandinvoice = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(77, 154, 115));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -213,13 +217,36 @@ public class PatientWorkAreaJPanel extends javax.swing.JPanel {
         jScrollPane2.setViewportView(insTable);
 
         add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 640, 130));
+
+        btnprescandinvoice.setText("Click here");
+        btnprescandinvoice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnprescandinvoiceActionPerformed(evt);
+            }
+        });
+        add(btnprescandinvoice, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 450, 110, -1));
+
+        jLabel3.setText("To print Prescription & Invoice -");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 450, 160, 20));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnprescandinvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnprescandinvoiceActionPerformed
+        // TODO add your handling code here:
+        
+        PatientInvoiceAndPrescriptionJPanel managePatientJPanel = new PatientInvoiceAndPrescriptionJPanel(userProcessContainer, userAccount, enterprise, ecoSystem);
+        userProcessContainer.add("managePatientJPanel", managePatientJPanel);
+        CardLayout layout=(CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);      
+
+    }//GEN-LAST:event_btnprescandinvoiceActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnprescandinvoice;
     private javax.swing.JTable insTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel patientId;
