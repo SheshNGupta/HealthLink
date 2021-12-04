@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import Business.Map.SendEmail;
 import java.util.List;
 import userinterface.HealthcareAccountantRole.ProcessMedicalBillingsJPanel;
+import userinterface.PatientRole.PatientPlanVisitJPanel;
 
 
 /**
@@ -154,6 +155,10 @@ public class SendEmailJPanel extends javax.swing.JPanel {
         {
         ManagerWorkAreaJPanel wjp = (ManagerWorkAreaJPanel) component;
         }
+        else if(type.equals("Customer")){
+            PatientPlanVisitJPanel ppj= (PatientPlanVisitJPanel) component;
+            ppj.populateTable();
+            }
         else
         {
             ProcessMedicalBillingsJPanel pmj= (ProcessMedicalBillingsJPanel) component;
