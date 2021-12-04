@@ -8,6 +8,7 @@ import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Enterprise.HealthCenterEnterprise;
 import Business.Enterprise.PharmaEnterprise;
+import Business.Map.SMS;
 
 import Business.Order.ItemList;
 import Business.Order.Order;
@@ -332,7 +333,7 @@ public class RequestOrderJPanel extends javax.swing.JPanel {
         if (org != null) {
             org.getWorkQueue().getWorkRequests().add(orderTreatmentWorkRequest);
             userAccount.getWorkQueue().getWorkRequests().add(orderTreatmentWorkRequest);
-            JOptionPane.showMessageDialog(null, "Order Placed");
+            
             txtLabMessage.setText("");
             //orderJtext.setText("");
             requestTestJButton.setEnabled(false);
@@ -356,6 +357,15 @@ public class RequestOrderJPanel extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(null, "Email Could not be sent due to technical issues");
                     System.out.println(ex.getMessage());
                 }
+            //Send SMS
+                try{
+                    SMS.SendSMS("+14793190560","Hi "+orderTreatmentWorkRequest.getHospitalAdmin().getEmployee().getName()+","+"\nYour order# : "+orderTreatmentWorkRequest.getOrder().getNumber()+" is placed"+
+                        "\n\nThanks,\n"+pharmaname+" Team");
+                }catch (Exception e){
+                     System.out.println(e.getMessage());
+                }
+         //Send SMS end
+         JOptionPane.showMessageDialog(null, "Order Placed");
         }
 
     }//GEN-LAST:event_requestTestJButtonActionPerformed

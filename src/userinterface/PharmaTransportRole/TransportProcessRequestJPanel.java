@@ -8,6 +8,7 @@ package userinterface.PharmaTransportRole;
 import userinterface.GovernmentTreasurerRole.*;
 import Business.Enterprise.Enterprise;
 import Business.Map.MapViewer;
+import Business.Map.SMS;
 import Business.Map.SendEmail;
 import Business.Order.ItemList;
 import Business.UserAccount.UserAccount;
@@ -227,6 +228,14 @@ public class TransportProcessRequestJPanel extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(null, "Email Could not be sent due to technical issues");
                     System.out.println(ex.getMessage());
                 }
+        //Send SMS
+                try{
+                    SMS.SendSMS("+14793190560","Hi "+orderItemRequest.getHospitalAdmin().getEmployee().getName()+","+"\nYour order# : "+orderItemRequest.getOrder().getNumber()+" is delivered!"+
+                        "\n\nThanks");
+                }catch (Exception e){
+                     System.out.println(e.getMessage());
+                }
+         //Send SMS end
         JOptionPane.showMessageDialog(null, "Order Delivered Successfully!!!");
         submitJButton.setEnabled(false);
         messageTxt.setText("");
@@ -278,9 +287,18 @@ public class TransportProcessRequestJPanel extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(null, "Email Could not be sent due to technical issues");
                     System.out.println(ex.getMessage());
                 }
+        //Send SMS
+                try{
+                    SMS.SendSMS("+14793190560","Hi "+orderItemRequest.getHospitalAdmin().getEmployee().getName()+","+"\nYour order# : "+orderItemRequest.getOrder().getNumber()+" is rejected\nMessage: "+message+
+                        "\n\nThanks");
+                }catch (Exception e){
+                     System.out.println(e.getMessage());
+                }
+         //Send SMS end
          messageTxt.setText("");
             btnReject.setEnabled(false);
             submitJButton.setEnabled(false);
+            JOptionPane.showMessageDialog(null, "Rejected");
         }
          messageTxt.setText("");   
         }
