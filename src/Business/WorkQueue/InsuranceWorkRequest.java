@@ -24,6 +24,8 @@ public class InsuranceWorkRequest extends WorkRequest {
     private double billAmount;
     private InsuranceCustomer insuranceCustomer;
     private String healthCenter;
+    private String customerEmail;
+    private String customerPhone;
 
     public String getPolicyNumber() {
         return policyNumber;
@@ -108,6 +110,22 @@ public class InsuranceWorkRequest extends WorkRequest {
 
     public void setHealthCenter(String healthCenter) {
         this.healthCenter = healthCenter;
+    }
+
+    public String getCustomerEmail() {
+        return customerEmail;
+    }
+
+    public void setCustomerEmail(String customerEmail) {
+        this.customerEmail = customerEmail;
+    }
+
+    public String getCustomerPhone() {
+        return customerPhone;
+    }
+
+    public void setCustomerPhone(String customerPhone) {
+        this.customerPhone = customerPhone;
     }
 
 }

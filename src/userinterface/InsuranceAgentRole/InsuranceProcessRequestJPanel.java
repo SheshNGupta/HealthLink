@@ -6,6 +6,8 @@
 package userinterface.InsuranceAgentRole;
 
 import Business.Enterprise.Enterprise;
+import Business.Map.SMS;
+import Business.Map.SendEmail;
 import Business.Organization.Organization;
 import Business.Organization.InsFinanceOrganization;
 import Business.UserAccount.UserAccount;
@@ -226,6 +228,7 @@ public class InsuranceProcessRequestJPanel extends javax.swing.JPanel {
     private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
 
         String message = txtMessage.getText();
+        String sub="Your Insurance claim is approved";
         if (message.equals("")) {
             JOptionPane.showMessageDialog(null, "Message is mandatory!");
             return;
@@ -255,6 +258,21 @@ public class InsuranceProcessRequestJPanel extends javax.swing.JPanel {
                 txtMessage.setText("");
                 btnReject.setEnabled(false);
                 btnAccept.setEnabled(false);
+                try{
+                SendEmail.send(insuranceWorkRequest.getCustomerEmail(),"\nHi "+insuranceWorkRequest.getInsuranceCustomer().getCustomerFirstName()+","+"\n\nYour Insurance claim of amount: "+ insuranceWorkRequest.getClaimAmount()+
+                        " is approved"+"\n\n\nThanks\n"+insuranceWorkRequest.getInsuranceCompany(),sub);
+            }catch(Exception ex){
+                    JOptionPane.showMessageDialog(null, "Email Could not be sent due to technical issues");
+                    System.out.println(ex.getMessage());
+                }
+        //Send SMS
+                try{
+                    SMS.SendSMS("+14793190560","Hi "+insuranceWorkRequest.getInsuranceCustomer().getCustomerFirstName()+","+"\n\nYour Insurance claim of amount: "+ insuranceWorkRequest.getClaimAmount()+
+                        " is approved"+"\n\nThanks,\n"+insuranceWorkRequest.getInsuranceCompany());
+                }catch (Exception e){
+                     System.out.println(e.getMessage());
+                }
+         //Send SMS end
 
             }
             txtMessage.setText("");
@@ -276,6 +294,7 @@ public class InsuranceProcessRequestJPanel extends javax.swing.JPanel {
     private void btnRejectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRejectActionPerformed
 
         String message = txtMessage.getText();
+        String sub="Your Insurance claim is rejected";
         if (message.equals("")) {
             JOptionPane.showMessageDialog(null, "Message is mandatory!");
             return;
@@ -288,6 +307,21 @@ public class InsuranceProcessRequestJPanel extends javax.swing.JPanel {
                 insuranceWorkRequest.setStatus("Rejected");
                 insuranceWorkRequest.setMessage(txtMessage.getText().trim());
                 insuranceWorkRequest.setAgent(account.getEmployee().getName());
+                try{
+                SendEmail.send(insuranceWorkRequest.getCustomerEmail(),"\nHi "+insuranceWorkRequest.getInsuranceCustomer().getCustomerFirstName()+","+"\n\nYour Insurance claim of amount: "+ insuranceWorkRequest.getClaimAmount()+
+                        " is rejected"+"\nMessage: "+message+"\n\n\nThanks\n"+insuranceWorkRequest.getInsuranceCompany(),sub);
+            }catch(Exception ex){
+                    JOptionPane.showMessageDialog(null, "Email Could not be sent due to technical issues");
+                    System.out.println(ex.getMessage());
+                }
+        //Send SMS
+                try{
+                    SMS.SendSMS("+14793190560","Hi "+insuranceWorkRequest.getInsuranceCustomer().getCustomerFirstName()+","+"\n\nYour Insurance claim of amount: "+ insuranceWorkRequest.getClaimAmount()+
+                        " is rejected"+"\nMessage: "+message+"\n\nThanks,\n"+insuranceWorkRequest.getInsuranceCompany());
+                }catch (Exception e){
+                     System.out.println(e.getMessage());
+                }
+         //Send SMS end
                 txtMessage.setText("");
                 btnReject.setEnabled(false);
                 btnAccept.setEnabled(false);
@@ -321,5 +355,5 @@ public class InsuranceProcessRequestJPanel extends javax.swing.JPanel {
         txtBillAmount.setText(String.valueOf(insuranceWorkRequest.getBillAmount()));
         txtClaimAmount.setText(String.valueOf(insuranceWorkRequest.getClaimAmount()));
 
-    }
+    }    
 }
