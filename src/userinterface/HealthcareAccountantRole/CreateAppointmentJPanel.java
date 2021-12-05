@@ -429,7 +429,7 @@ public class CreateAppointmentJPanel extends javax.swing.JPanel {
         });
         add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 600, 133, 55));
 
-        jButton2.setText("jButton2");
+        jButton2.setText("Photo");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -438,7 +438,7 @@ public class CreateAppointmentJPanel extends javax.swing.JPanel {
         add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, -1, -1));
 
         personImageLabel.setText("jLabel15");
-        add(personImageLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 140, 120));
+        add(personImageLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 150, 130));
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtHomePhoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHomePhoneActionPerformed
@@ -970,8 +970,8 @@ public class CreateAppointmentJPanel extends javax.swing.JPanel {
             Image imagescaled = img.getScaledInstance(210,213,Image.SCALE_SMOOTH);
             ImageIcon scaledIcon = new ImageIcon(imagescaled);
             personImageLabel.setIcon(scaledIcon);
-            JOptionPane.showMessageDialog(null, "Uplaod");
-
+            JOptionPane.showMessageDialog(null, "Upload");
+            }
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
