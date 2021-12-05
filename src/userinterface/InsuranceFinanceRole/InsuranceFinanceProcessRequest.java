@@ -6,6 +6,8 @@
 package userinterface.InsuranceFinanceRole;
 
 import Business.Enterprise.Enterprise;
+import Business.Map.SMS;
+import Business.Map.SendEmail;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.GovernmentFundRequest;
 import Business.WorkQueue.InsuranceWorkRequest;
@@ -210,9 +212,25 @@ public class InsuranceFinanceProcessRequest extends javax.swing.JPanel {
     private void btnDisburseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDisburseActionPerformed
 
         btnDisburse.setEnabled(true);
+        String sub="Your Insurance claim is disbursed";
         int dialogResult = JOptionPane.showConfirmDialog(null, "Do you want to proceed?");
         if (dialogResult == JOptionPane.YES_OPTION) {
             insuranceWorkRequest.setStatus("Insurance Claim Approved");
+            try{
+                SendEmail.send(insuranceWorkRequest.getCustomerEmail(),"\nHi "+insuranceWorkRequest.getInsuranceCustomer().getCustomerFirstName()+","+"\n\nYour Insurance claim of amount: "+ insuranceWorkRequest.getClaimAmount()+
+                        " is disbursed"+"\n\n\nThanks\n"+insuranceWorkRequest.getInsuranceCompany(),sub);
+            }catch(Exception ex){
+                    JOptionPane.showMessageDialog(null, "Email Could not be sent due to technical issues");
+                    System.out.println(ex.getMessage());
+                }
+        //Send SMS
+                try{
+                    SMS.SendSMS("+14793190560","Hi "+insuranceWorkRequest.getInsuranceCustomer().getCustomerFirstName()+","+"\n\nYour Insurance claim of amount: "+ insuranceWorkRequest.getClaimAmount()+
+                        " is disbursed"+"\n\nThanks,\n"+insuranceWorkRequest.getInsuranceCompany());
+                }catch (Exception e){
+                     System.out.println(e.getMessage());
+                }
+         //Send SMS end
             JOptionPane.showMessageDialog(null, "Claim Approved Successfully!!!");
             btnDisburse.setEnabled(false);
             btnReject.setEnabled(false);
@@ -221,11 +239,28 @@ public class InsuranceFinanceProcessRequest extends javax.swing.JPanel {
 
     private void btnRejectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRejectActionPerformed
 
+        String sub="Your Insurance claim is rejected";
         int dialogResult = JOptionPane.showConfirmDialog(null, "Do you want to proceed?");
         if (dialogResult == JOptionPane.YES_OPTION) {
             insuranceWorkRequest.setStatus("Insurance Claim Rejected");
+            try{
+                SendEmail.send(insuranceWorkRequest.getCustomerEmail(),"\nHi "+insuranceWorkRequest.getInsuranceCustomer().getCustomerFirstName()+","+"\n\nYour Insurance claim of amount: "+ insuranceWorkRequest.getClaimAmount()+
+                        " is rejected"+"\n\n\nThanks\n"+insuranceWorkRequest.getInsuranceCompany(),sub);
+            }catch(Exception ex){
+                    JOptionPane.showMessageDialog(null, "Email Could not be sent due to technical issues");
+                    System.out.println(ex.getMessage());
+                }
+        //Send SMS
+                try{
+                    SMS.SendSMS("+14793190560","Hi "+insuranceWorkRequest.getInsuranceCustomer().getCustomerFirstName()+","+"\n\nYour Insurance claim of amount: "+ insuranceWorkRequest.getClaimAmount()+
+                        " is rejected"+"\n\nThanks,\n"+insuranceWorkRequest.getInsuranceCompany());
+                }catch (Exception e){
+                     System.out.println(e.getMessage());
+                }
+         //Send SMS end
             btnReject.setEnabled(false);
             btnDisburse.setEnabled(false);
+            JOptionPane.showMessageDialog(null, "Claim Rejected");
         }
 
     }//GEN-LAST:event_btnRejectActionPerformed

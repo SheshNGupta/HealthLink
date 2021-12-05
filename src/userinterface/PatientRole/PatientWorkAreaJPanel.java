@@ -18,9 +18,11 @@ import Business.WorkQueue.InsuranceWorkRequest;
 import Business.WorkQueue.PatientVisitWorkRequest;
 import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
+
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import userinterface.AdministrativeRole.ViewAllOrderJPanel;
 
 /**
  *
@@ -148,6 +150,9 @@ public class PatientWorkAreaJPanel extends javax.swing.JPanel {
         insTable = new javax.swing.JTable();
         btnClickhere = new javax.swing.JButton();
 
+        jButton1 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+
         setBackground(new java.awt.Color(77, 154, 115));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -183,20 +188,20 @@ public class PatientWorkAreaJPanel extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Patient Id:");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(99, 31, -1, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, -1, -1));
 
         patientId.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         patientId.setForeground(new java.awt.Color(255, 255, 255));
-        add(patientId, new org.netbeans.lib.awtextra.AbsoluteConstraints(191, 26, 178, 20));
+        add(patientId, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, 178, 20));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Patient Name:");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 30, -1, -1));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 70, -1, -1));
 
         patientName.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         patientName.setForeground(new java.awt.Color(255, 255, 255));
-        add(patientName, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 20, 170, 30));
+        add(patientName, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 60, 170, 30));
 
         insTable.setBackground(new java.awt.Color(153, 255, 153));
         insTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -221,6 +226,7 @@ public class PatientWorkAreaJPanel extends javax.swing.JPanel {
         jScrollPane2.setViewportView(insTable);
 
         add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 640, 130));
+
 
         btnClickhere.setBackground(new java.awt.Color(255, 204, 51));
         btnClickhere.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -265,12 +271,39 @@ public class PatientWorkAreaJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnClickhereMouseClicked
 
+        jButton1.setBackground(new java.awt.Color(255, 204, 51));
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton1.setText("View Hospitals");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 440, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Patients Portal");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 20, -1, -1));
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        PatientPlanVisitJPanel patientPlanVisitJPanel = new PatientPlanVisitJPanel(userProcessContainer, userAccount,enterprise, ecoSystem);
+        userProcessContainer.add("PatientPlanVisitJPanel", patientPlanVisitJPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClickhere;
     private javax.swing.JTable insTable;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel patientId;

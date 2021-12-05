@@ -252,6 +252,14 @@ public class TreasurerProcessRequestJPanel extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(null, "Email Could not be sent due to technical issues");
                     System.out.println(ex.getMessage());
                 }
+        //Send SMS
+                try{
+                    SMS.SendSMS("+14793190560","Hi "+governmentFundRequest.getAdminName()+","+"\nYour Funds request is rejected for location: "+governmentFundRequest.getLocation()+
+                        "\nMessage: "+message+"\n\nThanks,\nGovernment");
+                }catch (Exception e){
+                     System.out.println(e.getMessage());
+                }
+         //Send SMS end
         JOptionPane.showMessageDialog(null, "Rejected!");
          messageTxt.setText("");
             btnReject.setEnabled(false);

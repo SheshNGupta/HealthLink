@@ -10,6 +10,8 @@ import Business.Enterprise.Enterprise;
 import Business.Enterprise.InsuranceCompanyEnterprise;
 import Business.Insurance.Insurance;
 import Business.InsuranceCustomer.InsuranceCustomer;
+import Business.Map.SMS;
+import Business.Map.SendEmail;
 import Business.Network.Network;
 import Business.Organization.AccountantOrganization;
 import Business.Organization.InsAgentOrganization;
@@ -271,8 +273,11 @@ public class AccountantProcessRequestJPanel extends javax.swing.JPanel {
         String ssn = accountBillingRequest.getPatient().getSsn();
         String policyName = accountBillingRequest.getPatient().getInsuranceCustomer().getInsurance().getPolicyName();
         String insuranceCompany = accountBillingRequest.getPatient().getInsuranceCustomer().getInsurance().getInsuranceCompany();
+        String email = accountBillingRequest.getPatient().getEmail();
+        String phone = accountBillingRequest.getPatient().getPhoneNumber();
         double claimAmount = Double.parseDouble(txtInsuranceClaimAmount.getText());
         double billAmount = accountBillingRequest.getBillingAmount();
+        String sub="Your Medical Bill is Processed";
 
 
        
@@ -295,8 +300,9 @@ public class AccountantProcessRequestJPanel extends javax.swing.JPanel {
             insuranceWorkRequest.setSender(userAccount);
             insuranceWorkRequest.setStatus("Sent");
             insuranceWorkRequest.setInsuranceCustomer(insuranceCustomer);
+            insuranceWorkRequest.setCustomerEmail(email);
+            insuranceWorkRequest.setCustomerPhone(phone);
             
-
             Organization org = null;
             InsuranceCompanyEnterprise matchedInsuranceCompany = null;
 
@@ -322,7 +328,23 @@ public class AccountantProcessRequestJPanel extends javax.swing.JPanel {
                 accountBillingRequest.setStatus("Patient Transaction Completed");
                 accountBillingRequest.getPatient().setIsTreatmentComplete(true);
                 accountBillingRequest.getVisitRequest().setIsComplete(true);
-                JOptionPane.showMessageDialog(null, "Money received from patient: " + payableAmount+". Insurance Claim Request Raised Successfully for amount:" + claimAmount);
+                try{
+                SendEmail.send(accountBillingRequest.getPatient().getEmail(),"\nHi "+accountBillingRequest.getPatient().getPatientFirstName()+","+"\n\nYour Medical bill of amount: "+ accountBillingRequest.getBillingAmount()+
+                        " is processed"+"\n\n\nThanks\n"+enterprise.getName(),sub);
+            }catch(Exception ex){
+                    JOptionPane.showMessageDialog(null, "Email Could not be sent due to technical issues");
+                    System.out.println(ex.getMessage());
+                }
+        //Send SMS
+                try{
+                    SMS.SendSMS("+14793190560","Hi "+accountBillingRequest.getPatient().getPatientFirstName()+","+"\nYour Medical Bill of amount: "+ accountBillingRequest.getBillingAmount()+
+                        " is processed"+"\n\nThanks,\n"+enterprise.getName());
+                }catch (Exception e){
+                     System.out.println(e.getMessage());
+                }
+         //Send SMS end
+         JOptionPane.showMessageDialog(null, "Money received from patient: " + payableAmount+". Insurance Claim Request Raised Successfully for amount:" + claimAmount);
+                
            btnSendRequestForInsurance.setEnabled(false);
             }
             
@@ -343,9 +365,25 @@ public class AccountantProcessRequestJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_backJButtonActionPerformed
 
     private void btnCOllectCashActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCOllectCashActionPerformed
+        String sub="Your Medical Bill is Processed";
         accountBillingRequest.setStatus("Patient Transaction Completed");
         accountBillingRequest.getPatient().setIsTreatmentComplete(true);
         accountBillingRequest.getVisitRequest().setIsComplete(true);
+        try{
+                SendEmail.send(accountBillingRequest.getPatient().getEmail(),"\nHi "+accountBillingRequest.getPatient().getPatientFirstName()+","+"\n\nYour Medical bill of amount: "+ accountBillingRequest.getBillingAmount()+
+                        " is processed"+"\n\n\nThanks\n"+enterprise.getName(),sub);
+            }catch(Exception ex){
+                    JOptionPane.showMessageDialog(null, "Email Could not be sent due to technical issues");
+                    System.out.println(ex.getMessage());
+                }
+        //Send SMS
+                try{
+                    SMS.SendSMS("+14793190560","Hi "+accountBillingRequest.getPatient().getPatientFirstName()+","+"\nYour Medical Bill of amount: "+ accountBillingRequest.getBillingAmount()+
+                        " is processed"+"\n\nThanks,\n"+enterprise.getName());
+                }catch (Exception e){
+                     System.out.println(e.getMessage());
+                }
+         //Send SMS end
         JOptionPane.showMessageDialog(null, "Amount received from Patient");
         btnCOllectCash.setEnabled(false);
     }//GEN-LAST:event_btnCOllectCashActionPerformed

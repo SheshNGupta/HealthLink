@@ -8,6 +8,9 @@ package userinterface.PharmaManagerRole;
 import userinterface.GovernmentTreasurerRole.*;
 import Business.Enterprise.Enterprise;
 import Business.Map.MapViewer;
+import Business.Map.SMS;
+import Business.Map.SendEmail;
+import Business.Order.ItemList;
 import Business.Organization.Organization;
 import Business.Organization.TransportOrganization;
 import Business.UserAccount.UserAccount;
@@ -16,6 +19,7 @@ import Business.WorkQueue.LabTestWorkRequest;
 import Business.WorkQueue.OrderWorkRequest;
 import java.awt.CardLayout;
 import java.awt.Component;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -206,6 +210,8 @@ public class ManagerProcessRequestJPanel extends javax.swing.JPanel {
     private void submitJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitJButtonActionPerformed
         submitJButton.setEnabled(true);
         String message = messageTxt.getText();
+        String sub = "Your Order is Ready to deliver";
+        String odrderDtl = "Order Details\n*************************************************\n";
         if (message.equals("")) {
             JOptionPane.showMessageDialog(null, "Message is mandatory!");
             return;
@@ -231,6 +237,30 @@ public class ManagerProcessRequestJPanel extends javax.swing.JPanel {
             org.getWorkQueue().getWorkRequests().add(orderItemRequest);
             userAccount.getWorkQueue().getWorkRequests().add(orderItemRequest);
         }
+        //Send email
+        try{
+                    
+                    List<ItemList> itm = orderItemRequest.getOrder().getItems();
+                    for(ItemList i:itm)
+                    {
+                        odrderDtl=odrderDtl+"Item: "+i.getItem()+" , Quantity: "+i.getQuantity()+", Item Price: $"+i.getTotal()+"\n";
+                    }
+                    odrderDtl = odrderDtl+"*************************************************\n";
+                    odrderDtl=odrderDtl+"\n\nTotal Price: $"+orderItemRequest.getOrder().getAmount();
+                SendEmail.send(orderItemRequest.getHospitalAdmin().getEmployee().getEmail(),"\nHi "+orderItemRequest.getHospitalAdmin().getEmployee().getName()+","+"\n\nYour Order# "+ orderItemRequest.getOrder().getNumber()+
+                        " is ready for delivery"+"\n\n\n\n"+odrderDtl+"\n\nThanks,\n",sub);
+                }catch(Exception ex){
+                    JOptionPane.showMessageDialog(null, "Email Could not be sent due to technical issues");
+                    System.out.println(ex.getMessage());
+                }
+        //Send SMS
+                try{
+                    SMS.SendSMS("+14793190560","Hi "+orderItemRequest.getHospitalAdmin().getEmployee().getName()+","+"\nYour order# : "+orderItemRequest.getOrder().getNumber()+" is ready for delivery"+
+                        "\n\nThanks");
+                }catch (Exception e){
+                     System.out.println(e.getMessage());
+                }
+         //Send SMS end
         JOptionPane.showMessageDialog(null, "Request to Transport sent Successful!!!");
         messageTxt.setText("");
             btnReject.setEnabled(false);
@@ -255,6 +285,8 @@ public class ManagerProcessRequestJPanel extends javax.swing.JPanel {
 
     private void btnRejectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRejectActionPerformed
         String message = messageTxt.getText();
+        String sub = "Your Order is Rejected";
+        String odrderDtl = "Order Details\n*************************************************\n";
         if (message.equals("")) {
             JOptionPane.showMessageDialog(null, "Message is mandatory!");
             return;
@@ -265,9 +297,34 @@ public class ManagerProcessRequestJPanel extends javax.swing.JPanel {
             
             if (dialogResult == JOptionPane.YES_OPTION) {
         orderItemRequest.setStatus("Rejected");
+        try{
+                    
+                    List<ItemList> itm = orderItemRequest.getOrder().getItems();
+                    for(ItemList i:itm)
+                    {
+                        odrderDtl=odrderDtl+"Item: "+i.getItem()+" , Quantity: "+i.getQuantity()+", Item Price: $"+i.getTotal()+"\n";
+                    }
+                    odrderDtl = odrderDtl+"*************************************************\n";
+                    odrderDtl=odrderDtl+"\n\nTotal Price: $"+orderItemRequest.getOrder().getAmount();
+                SendEmail.send(orderItemRequest.getHospitalAdmin().getEmployee().getEmail(),"\nHi "+orderItemRequest.getHospitalAdmin().getEmployee().getName()+","+"\n\nYour Order# "+ orderItemRequest.getOrder().getNumber()+
+                        " is Rejected by: "+orderItemRequest.getReceiver().getEmployee().getName()+"\nMessage: "+message
+                +"\n\n\n\n"+odrderDtl+"\n\nThanks,\n",sub);
+                }catch(Exception ex){
+                    JOptionPane.showMessageDialog(null, "Email Could not be sent due to technical issues");
+                    System.out.println(ex.getMessage());
+                }
+        //Send SMS
+                try{
+                    SMS.SendSMS("+14793190560","Hi "+orderItemRequest.getHospitalAdmin().getEmployee().getName()+","+"\nYour order# : "+orderItemRequest.getOrder().getNumber()+" is rejected\nMessage: "+message+
+                        "\n\nThanks");
+                }catch (Exception e){
+                     System.out.println(e.getMessage());
+                }
+         //Send SMS end
          messageTxt.setText("");
             btnReject.setEnabled(false);
             submitJButton.setEnabled(false);
+            JOptionPane.showMessageDialog(null, "Rejected");
         }
          messageTxt.setText("");   
         }
