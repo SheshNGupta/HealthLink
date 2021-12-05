@@ -23,6 +23,8 @@ import Business.WorkQueue.PatientVisitWorkRequest;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Image;
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -34,9 +36,12 @@ import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import userinterface.DoctorRole.DoctorWorkAreaJPanel;
 
 /**
@@ -135,6 +140,8 @@ public class CreateAppointmentJPanel extends javax.swing.JPanel {
         jLabel11 = new javax.swing.JLabel();
         rePasswordJTextField = new javax.swing.JPasswordField();
         btnUpdate = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        personImageLabel = new javax.swing.JLabel();
 
         jLabel14.setText("Middle Name :");
 
@@ -421,6 +428,17 @@ public class CreateAppointmentJPanel extends javax.swing.JPanel {
             }
         });
         add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 600, 133, 55));
+
+        jButton2.setText("jButton2");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, -1, -1));
+
+        personImageLabel.setText("jLabel15");
+        add(personImageLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 140, 120));
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtHomePhoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHomePhoneActionPerformed
@@ -932,6 +950,30 @@ public class CreateAppointmentJPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        
+        String Path ;
+            JFileChooser jFileChooser = new JFileChooser();
+            jFileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+            FileNameExtensionFilter filter = new FileNameExtensionFilter("*.Images", "jpg", "png");
+            jFileChooser.addChoosableFileFilter(filter);
+            int result = jFileChooser.showSaveDialog(null);
+            if (result == JFileChooser.APPROVE_OPTION)
+            {
+            File selectedFile = jFileChooser.getSelectedFile();
+            Path = selectedFile.getAbsolutePath();
+            
+            
+            ImageIcon icon = new ImageIcon(Path);
+            Image img = icon.getImage();
+            Image imagescaled = img.getScaledInstance(210,213,Image.SCALE_SMOOTH);
+            ImageIcon scaledIcon = new ImageIcon(imagescaled);
+            personImageLabel.setIcon(scaledIcon);
+            JOptionPane.showMessageDialog(null, "Uplaod");
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
@@ -945,6 +987,7 @@ public class CreateAppointmentJPanel extends javax.swing.JPanel {
     private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.JTextField emailTextField;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -972,6 +1015,7 @@ public class CreateAppointmentJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblPolicyNum;
     private javax.swing.JTextField nameJTextField;
     private javax.swing.JPasswordField passwordJTextField;
+    private javax.swing.JLabel personImageLabel;
     private javax.swing.JRadioButton radioBtnFemale;
     private javax.swing.JRadioButton radioBtnMale;
     private javax.swing.JRadioButton radioBtnOther;
