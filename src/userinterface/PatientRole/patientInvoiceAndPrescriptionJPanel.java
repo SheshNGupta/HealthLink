@@ -88,7 +88,6 @@ public class patientInvoiceAndPrescriptionJPanel extends javax.swing.JPanel {
 
         invoicejPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
         lblPatientId = new javax.swing.JLabel();
         txtPatientId = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -108,21 +107,27 @@ public class patientInvoiceAndPrescriptionJPanel extends javax.swing.JPanel {
 
         invoicejPanel.setBackground(new java.awt.Color(77, 154, 115));
         invoicejPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 0));
+        invoicejPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Patient Invoice");
+        invoicejPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 27, 718, -1));
 
         lblPatientId.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblPatientId.setForeground(new java.awt.Color(255, 255, 255));
         lblPatientId.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblPatientId.setText("Patient ID:");
+        invoicejPanel.add(lblPatientId, new org.netbeans.lib.awtextra.AbsoluteConstraints(117, 87, 77, -1));
+        invoicejPanel.add(txtPatientId, new org.netbeans.lib.awtextra.AbsoluteConstraints(198, 85, 164, -1));
 
         txtAreaReceipt.setColumns(20);
         txtAreaReceipt.setRows(5);
         txtAreaReceipt.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jScrollPane1.setViewportView(txtAreaReceipt);
+
+        invoicejPanel.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(372, 78, 313, 241));
 
         btnPrint.setBackground(new java.awt.Color(255, 204, 51));
         btnPrint.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -132,6 +137,7 @@ public class patientInvoiceAndPrescriptionJPanel extends javax.swing.JPanel {
                 btnPrintActionPerformed(evt);
             }
         });
+        invoicejPanel.add(btnPrint, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 340, 92, -1));
 
         btnBack.setBackground(new java.awt.Color(255, 204, 51));
         btnBack.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -141,118 +147,44 @@ public class patientInvoiceAndPrescriptionJPanel extends javax.swing.JPanel {
                 btnBackActionPerformed(evt);
             }
         });
+        invoicejPanel.add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 93, 31));
 
         lblPatientName.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblPatientName.setForeground(new java.awt.Color(255, 255, 255));
         lblPatientName.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblPatientName.setText("Patient Name:");
+        invoicejPanel.add(lblPatientName, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 113, -1, -1));
+        invoicejPanel.add(txtPatientName, new org.netbeans.lib.awtextra.AbsoluteConstraints(198, 111, 164, -1));
 
         lblPolicyNumber.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblPolicyNumber.setForeground(new java.awt.Color(255, 255, 255));
         lblPolicyNumber.setText("Policy Number, if any :");
+        invoicejPanel.add(lblPolicyNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(58, 165, -1, -1));
+        invoicejPanel.add(txtPolicyNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(198, 163, 164, -1));
 
         lblDoctorName.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblDoctorName.setForeground(new java.awt.Color(255, 255, 255));
         lblDoctorName.setText("Consulted By :");
+        invoicejPanel.add(lblDoctorName, new org.netbeans.lib.awtextra.AbsoluteConstraints(105, 139, -1, -1));
+        invoicejPanel.add(txtDoctorName, new org.netbeans.lib.awtextra.AbsoluteConstraints(198, 137, 164, -1));
 
         lblClaimAmount.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblClaimAmount.setForeground(new java.awt.Color(255, 255, 255));
         lblClaimAmount.setText("Claim Amount:");
+        invoicejPanel.add(lblClaimAmount, new org.netbeans.lib.awtextra.AbsoluteConstraints(104, 191, -1, -1));
+        invoicejPanel.add(txtClaimAmount, new org.netbeans.lib.awtextra.AbsoluteConstraints(198, 189, 164, -1));
 
         lblTotalAmount.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblTotalAmount.setForeground(new java.awt.Color(255, 255, 255));
         lblTotalAmount.setText("Total Bill Amount:");
-
-        javax.swing.GroupLayout invoicejPanelLayout = new javax.swing.GroupLayout(invoicejPanel);
-        invoicejPanel.setLayout(invoicejPanelLayout);
-        invoicejPanelLayout.setHorizontalGroup(
-            invoicejPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(invoicejPanelLayout.createSequentialGroup()
-                .addGroup(invoicejPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(invoicejPanelLayout.createSequentialGroup()
-                        .addGap(58, 58, 58)
-                        .addGroup(invoicejPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(invoicejPanelLayout.createSequentialGroup()
-                                .addComponent(lblPatientId, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtPatientId, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(invoicejPanelLayout.createSequentialGroup()
-                                .addGroup(invoicejPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblPolicyNumber)
-                                    .addComponent(lblPatientName)
-                                    .addComponent(lblDoctorName)
-                                    .addComponent(lblClaimAmount)
-                                    .addComponent(lblTotalAmount))
-                                .addGroup(invoicejPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(invoicejPanelLayout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(invoicejPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txtPatientName)
-                                            .addComponent(txtPolicyNumber)
-                                            .addComponent(txtDoctorName)
-                                            .addComponent(txtClaimAmount)
-                                            .addComponent(txtBillAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(invoicejPanelLayout.createSequentialGroup()
-                                        .addGap(157, 157, 157)
-                                        .addComponent(btnPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 242, Short.MAX_VALUE))))
-                    .addGroup(invoicejPanelLayout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(33, Short.MAX_VALUE))
-        );
-        invoicejPanelLayout.setVerticalGroup(
-            invoicejPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(invoicejPanelLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(invoicejPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(invoicejPanelLayout.createSequentialGroup()
-                        .addGap(13, 13, 13)
-                        .addGroup(invoicejPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblPatientId)
-                            .addComponent(txtPatientId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(invoicejPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblPatientName)
-                            .addComponent(txtPatientName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(invoicejPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblDoctorName)
-                            .addComponent(txtDoctorName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(invoicejPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblPolicyNumber)
-                            .addComponent(txtPolicyNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(invoicejPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtClaimAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblClaimAmount))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(invoicejPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblTotalAmount)
-                            .addComponent(txtBillAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(invoicejPanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnPrint)
-                .addGap(18, 18, 18)
-                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(38, Short.MAX_VALUE))
-        );
+        invoicejPanel.add(lblTotalAmount, new org.netbeans.lib.awtextra.AbsoluteConstraints(84, 217, -1, -1));
+        invoicejPanel.add(txtBillAmount, new org.netbeans.lib.awtextra.AbsoluteConstraints(198, 215, 164, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(invoicejPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(invoicejPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 828, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -294,7 +226,6 @@ public class patientInvoiceAndPrescriptionJPanel extends javax.swing.JPanel {
     private javax.swing.JPanel invoicejPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblClaimAmount;
     private javax.swing.JLabel lblDoctorName;
     private javax.swing.JLabel lblPatientId;
