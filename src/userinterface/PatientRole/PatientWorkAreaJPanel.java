@@ -222,13 +222,14 @@ public class PatientWorkAreaJPanel extends javax.swing.JPanel {
 
         jButton1.setBackground(new java.awt.Color(255, 204, 51));
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/IconsImages/view.png"))); // NOI18N
         jButton1.setText("View Hospitals");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 440, -1, -1));
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 430, 140, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -237,13 +238,14 @@ public class PatientWorkAreaJPanel extends javax.swing.JPanel {
 
         jButton2.setBackground(new java.awt.Color(255, 204, 51));
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/IconsImages/printer.png"))); // NOI18N
         jButton2.setText("Print Invoice");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 440, -1, -1));
+        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 430, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
