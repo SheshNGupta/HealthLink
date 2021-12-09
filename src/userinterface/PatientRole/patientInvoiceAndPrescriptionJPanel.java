@@ -113,7 +113,7 @@ public class patientInvoiceAndPrescriptionJPanel extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Patient Invoice");
-        invoicejPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 27, 718, -1));
+        invoicejPanel.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(168, 27, 550, -1));
 
         lblPatientId.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblPatientId.setForeground(new java.awt.Color(255, 255, 255));
