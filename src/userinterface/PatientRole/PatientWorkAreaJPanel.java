@@ -150,6 +150,7 @@ public class PatientWorkAreaJPanel extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        btnprescription = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(77, 154, 115));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -246,6 +247,17 @@ public class PatientWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
         add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 430, -1, -1));
+
+        btnprescription.setBackground(new java.awt.Color(255, 204, 51));
+        btnprescription.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btnprescription.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/IconsImages/printer.png"))); // NOI18N
+        btnprescription.setText("Print Prescription");
+        btnprescription.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnprescriptionActionPerformed(evt);
+            }
+        });
+        add(btnprescription, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 430, 160, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -272,8 +284,29 @@ public class PatientWorkAreaJPanel extends javax.swing.JPanel {
         layout.next(userProcessContainer);
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void btnprescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnprescriptionActionPerformed
+        // TODO add your handling code here:
+        
+        int selectedRow = workRequestJTable.getSelectedRow();
+
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null,"Please select a row first");
+            return;
+        }
+        PatientVisitWorkRequest visit2 = (PatientVisitWorkRequest)workRequestJTable.getValueAt(selectedRow, 0);
+
+        patientPrescriptionJPanel managePrescriptionJPanel = new patientPrescriptionJPanel (userProcessContainer, userAccount, enterprise, ecoSystem,visit2 );
+        userProcessContainer.add("managePrescriptionJPanel ", managePrescriptionJPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+        
+        
+        
+    }//GEN-LAST:event_btnprescriptionActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnprescription;
     private javax.swing.JTable insTable;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
