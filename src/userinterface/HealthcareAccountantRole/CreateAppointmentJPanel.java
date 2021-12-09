@@ -20,9 +20,18 @@ import Business.Patient.Patient;
 import Business.Role.PatientRole;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.PatientVisitWorkRequest;
+import com.github.sarxos.webcam.Webcam;
+import com.github.sarxos.webcam.WebcamPanel;
+import com.github.sarxos.webcam.WebcamResolution;
+import com.github.sarxos.webcam.WebcamUtils;
+import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -34,9 +43,14 @@ import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import userinterface.DoctorRole.DoctorWorkAreaJPanel;
 
 /**
@@ -135,6 +149,9 @@ public class CreateAppointmentJPanel extends javax.swing.JPanel {
         jLabel11 = new javax.swing.JLabel();
         rePasswordJTextField = new javax.swing.JPasswordField();
         btnUpdate = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        personImageLabels = new javax.swing.JLabel();
+        jButton3 = new javax.swing.JButton();
 
         jLabel14.setText("Middle Name :");
 
@@ -421,6 +438,23 @@ public class CreateAppointmentJPanel extends javax.swing.JPanel {
             }
         });
         add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 600, 133, 55));
+
+        jButton2.setText("Webcam");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, -1, -1));
+        add(personImageLabels, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 180, 160));
+
+        jButton3.setText("Save");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 320, 100, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtHomePhoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHomePhoneActionPerformed
@@ -932,6 +966,137 @@ public class CreateAppointmentJPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        
+//        String Path ;
+//            JFileChooser jFileChooser = new JFileChooser();
+//            jFileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+//            FileNameExtensionFilter filter = new FileNameExtensionFilter("*.Images", "jpg", "png");
+//            jFileChooser.addChoosableFileFilter(filter);
+//            int result = jFileChooser.showSaveDialog(null);
+//            if (result == JFileChooser.APPROVE_OPTION)
+//            {
+//            File selectedFile = jFileChooser.getSelectedFile();
+//            Path = selectedFile.getAbsolutePath();
+//            
+//            
+//            ImageIcon icon = new ImageIcon(Path);
+//            Image img = icon.getImage();
+//            Image imagescaled = img.getScaledInstance(210,213,Image.SCALE_SMOOTH);
+//            ImageIcon scaledIcon = new ImageIcon(imagescaled);
+//            personImageLabel.setIcon(scaledIcon);
+//            JOptionPane.showMessageDialog(null, "Upload");
+//            }
+            
+            
+            JButton btnGo = new JButton("Capture");
+            String filepath = "/userinterface/";
+            try{
+            Webcam webcam = Webcam.getDefault();
+            webcam.setViewSize(WebcamResolution.VGA.getSize());
+
+
+
+            WebcamPanel panel = new WebcamPanel(webcam);
+            panel.setFPSDisplayed(true);
+            panel.setDisplayDebugInfo(true);
+            panel.setImageSizeDisplayed(true);
+            panel.setMirrored(true);
+
+
+
+            JFrame window = new JFrame ("Camera capture ");
+            window.add(panel);
+            window.add(btnGo, BorderLayout.SOUTH);
+            btnGo.addActionListener(new ActionListener() 
+            {
+
+                public void actionPerformed(ActionEvent e) 
+                {
+
+    //                Properties pro = getProperties();
+    //                filePath = pro.getProperty("RobotWorkPlace")+"CamPic/Pic";
+    //                filePath = getClass().getResource()
+
+                    WebcamUtils.capture(webcam, txtPatientIdentifier.getText()+".jpg");
+                    //BufferedImage image = webcam.getImage();
+                    JOptionPane.showMessageDialog(null,"Image taken");
+                    webcam.close();
+
+                }
+            }
+            );
+            window.setResizable(true);
+    //        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            window.pack();
+            window.setLocationRelativeTo(null);
+            window.setVisible(true);
+            }
+            catch(Exception e)
+            {
+            JOptionPane.showMessageDialog(null,"Error writing file");
+            return;
+            }
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+
+        
+//            String Path ;
+//            Path = txtFirstName.getText()+txtLastName.getText();
+//            System.out.println(Path);
+//            Path = String.valueOf(getClass().getResource("/" + ));
+//            System.out.priPathntln("Next");
+//            System.out.println(Path);
+            
+
+
+            String Path;
+            Path = txtPatientIdentifier.getText()+".jpg";
+            ImageIcon icon = new ImageIcon(Path);
+            Image img = icon.getImage();
+            Image imagescaled = img.getScaledInstance(240,240,Image.SCALE_SMOOTH);
+            ImageIcon scaledIcon = new ImageIcon(imagescaled);
+            personImageLabels.setIcon(scaledIcon);
+//          personImageLabels.setIcon(new javax.swing.ImageIcon((txtFirstName.getText()+txtLastName.getText()+".jpg" )));
+
+            
+              //txtFirstName.getText()+txtLastName.getText();
+//            JFileChooser jFileChooser = new JFileChooser();
+//            jFileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+//            FileNameExtensionFilter filter = new FileNameExtensionFilter("*.Images", "jpg", "png");
+//            jFileChooser.addChoosableFileFilter(filter);
+//            int result = jFileChooser.showSaveDialog(null);
+//            if (result == JFileChooser.APPROVE_OPTION)
+//            {
+//            File selectedFile = jFileChooser.getSelectedFile();
+//            Path = selectedFile.getAbsolutePath();
+//            System.out.print(Path);
+           
+//            personImageLabels.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/" + txtFirstName.getText()+txtLastName.getText()+ ".jpg")));
+
+//            personImageLabels.setIcon(new javax.swing.ImageIcon(("bharattankalaaaa.jpg")));
+
+//            ImageIcon icon = new ImageIcon(Path);
+//            Image img = icon.getImage();
+//            Image imagescaled = img.getScaledInstance(210,213,Image.SCALE_SMOOTH);
+//            ImageIcon scaledIcon = new ImageIcon(imagescaled);
+//            personImageLabels.setIcon(scaledIcon);
+
+
+//            JOptionPane.showMessageDialog(null, "Image Saved");
+
+
+
+
+//            }
+
+
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
@@ -945,6 +1110,8 @@ public class CreateAppointmentJPanel extends javax.swing.JPanel {
     private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.JTextField emailTextField;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -972,6 +1139,7 @@ public class CreateAppointmentJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblPolicyNum;
     private javax.swing.JTextField nameJTextField;
     private javax.swing.JPasswordField passwordJTextField;
+    private javax.swing.JLabel personImageLabels;
     private javax.swing.JRadioButton radioBtnFemale;
     private javax.swing.JRadioButton radioBtnMale;
     private javax.swing.JRadioButton radioBtnOther;
