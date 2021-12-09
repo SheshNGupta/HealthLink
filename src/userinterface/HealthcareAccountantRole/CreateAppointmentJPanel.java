@@ -439,7 +439,10 @@ public class CreateAppointmentJPanel extends javax.swing.JPanel {
         });
         add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 600, 133, 55));
 
-        jButton2.setText("Webcam");
+        jButton2.setBackground(new java.awt.Color(255, 204, 0));
+        jButton2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/IconsImages/camera.png"))); // NOI18N
+        jButton2.setText("Take Picture");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -448,13 +451,16 @@ public class CreateAppointmentJPanel extends javax.swing.JPanel {
         add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, -1, -1));
         add(personImageLabels, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 180, 160));
 
+        jButton3.setBackground(new java.awt.Color(255, 204, 0));
+        jButton3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/IconsImages/yes.png"))); // NOI18N
         jButton3.setText("Save");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
-        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 320, 100, -1));
+        add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 320, 100, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtHomePhoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHomePhoneActionPerformed
