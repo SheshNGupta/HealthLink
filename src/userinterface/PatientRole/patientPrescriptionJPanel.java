@@ -41,6 +41,8 @@ public class patientPrescriptionJPanel extends javax.swing.JPanel {
         this.ecoSystem = ecoSystem;
         this.visitWorkRequest = visitWorkRequest;
         
+        try{
+        
         txtPatientIdP.setText(userAccount.getCus().getPatientId());
         txtPatientNameP.setText(userAccount.getCus().getPatientFirstName()+" "+userAccount.getCus().getPatientLastName());
         txtConsultedBy.setText(visitWorkRequest.getAssignedDoctor().getEmployee().getName());
@@ -54,7 +56,11 @@ public class patientPrescriptionJPanel extends javax.swing.JPanel {
         String prescription = String.format(txtPrescription.getText());
         
         txtAreaPrescription.append("\t Patient Prescription\n\n"+ " Patient ID: "+patientIdp+ "\n Patient Name: "+patientNamep+ "\n Consulted By: "+doctorNamep+ "\n Prescription: "+prescription+ "\n\n \t Thank You For Visiting" + "\n\n \t Please Take Care");
-    
+        }catch(Exception e ){
+        
+            JOptionPane.showMessageDialog(null, "Nothing to display ");
+            
+        }
         
     }
 

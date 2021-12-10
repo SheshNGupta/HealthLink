@@ -44,6 +44,8 @@ public class patientInvoiceAndPrescriptionJPanel extends javax.swing.JPanel {
         this.visitWorkRequest = visitWorkRequest;
         double claimAmount =0.0;
         
+        
+        try{
         txtPatientId.setText(userAccount.getCus().getPatientId());
         txtPatientName.setText(userAccount.getCus().getPatientFirstName()+" "+userAccount.getCus().getPatientLastName());
         txtDoctorName.setText(visitWorkRequest.getAssignedDoctor().getEmployee().getName());
@@ -65,6 +67,10 @@ public class patientInvoiceAndPrescriptionJPanel extends javax.swing.JPanel {
         String policyNumber = String.format(txtPolicyNumber.getText());
         
         txtAreaReceipt.append("\t Patient invoice\n\n"+ " Patient ID: "+patientId+ "\n Patient Name: "+patientName+ "\n Consulted By: "+doctorName+ "\n Policy Number: "+policyNumber+ "\n Claim Amount: "+clmAmount+ "\n Total Bill Amount: "+billAmount+ "\n\n \t Thank You For Visiting" + "\n\n \t Please Take Care");
+    
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Nothing to display ");
+        }
     }
     
     public void setEditableFalse(){
