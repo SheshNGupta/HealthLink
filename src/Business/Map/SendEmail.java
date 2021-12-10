@@ -15,7 +15,7 @@ import javax.mail.internet.*;
 public class SendEmail{  
     public static void send(String to,String msg,String sub){  
           //Get properties object    
-          String from = "donotreplyfoodnetwork@gmail.com";
+          String from = "donotreply.healthlink@gmail.com";
           String password="Money@1234";
           //String sub = "Your Order is dispatched for delivery";
           Properties props = new Properties();    
