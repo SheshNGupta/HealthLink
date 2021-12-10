@@ -1272,6 +1272,7 @@ public class CreateAppointmentJPanel extends javax.swing.JPanel {
         nameJTextField.setText(patient.getUserAccount().getUsername());
         passwordJTextField.setText(patient.getUserAccount().getPassword());
         rePasswordJTextField.setText(patient.getUserAccount().getPassword());
+        
 //        Addded by Bharat
         String Path;
         Path = txtPatientIdentifier.getText()+".jpg";
