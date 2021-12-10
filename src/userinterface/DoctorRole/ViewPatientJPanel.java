@@ -218,7 +218,7 @@ public class ViewPatientJPanel extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String filePath = "C:\\Users\\Shubhi\\Downloads\\ICD.xlsx";
+        String filePath = "ICD.xlsx";
         Desktop dt = Desktop.getDesktop();
         
         try{
@@ -270,7 +270,7 @@ public class ViewPatientJPanel extends javax.swing.JPanel {
         Path = txtPatientId.getText()+".jpg";
         ImageIcon icon = new ImageIcon(Path);
         Image img = icon.getImage();
-        Image imagescaled = img.getScaledInstance(240,240,Image.SCALE_SMOOTH);
+        Image imagescaled = img.getScaledInstance(130,120,Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(imagescaled);
         personImageLabels.setIcon(scaledIcon);
         

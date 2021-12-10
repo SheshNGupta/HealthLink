@@ -273,7 +273,7 @@ public class ProvidePrescriptionsJPanel extends javax.swing.JPanel {
 
     private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
         // TODO add your handling code here:
-        String filePath = "C:\\Users\\Shubhi\\Downloads\\ICD.xlsx";
+        String filePath = "ICD.xlsx";
         Desktop dt = Desktop.getDesktop();
         try{
         dt.open(new File(filePath));
