@@ -1273,6 +1273,15 @@ public class CreateAppointmentJPanel extends javax.swing.JPanel {
         passwordJTextField.setText(patient.getUserAccount().getPassword());
         rePasswordJTextField.setText(patient.getUserAccount().getPassword());
         
+//        Addded by Bharat
+        String Path;
+        Path = txtPatientIdentifier.getText()+".jpg";
+        ImageIcon icon = new ImageIcon(Path);
+        Image img = icon.getImage();
+        Image imagescaled = img.getScaledInstance(180,160,Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imagescaled);
+        personImageLabels.setIcon(scaledIcon);
+//        
         String sex = patient.getSex();
         
         if(sex.equals("Male"))

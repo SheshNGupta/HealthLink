@@ -18,6 +18,8 @@ import Business.WorkQueue.InsuranceWorkRequest;
 import Business.WorkQueue.PatientVisitWorkRequest;
 import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -41,6 +43,7 @@ public class PatientWorkAreaJPanel extends javax.swing.JPanel {
 
     public PatientWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Enterprise enterprise,EcoSystem business) {
         initComponents();
+        
         this.userProcessContainer = userProcessContainer;
         this.enterprise = enterprise;
         this.userAccount = account;
@@ -49,6 +52,8 @@ public class PatientWorkAreaJPanel extends javax.swing.JPanel {
         patientName.setText(userAccount.getCus().getPatientFirstName()+" "+userAccount.getCus().getPatientLastName());
         populateTable();
         populateInsTable();
+        addImage();
+        
     }
     public void populateTable() {
         DefaultTableModel model = (DefaultTableModel) workRequestJTable.getModel();
@@ -152,6 +157,8 @@ public class PatientWorkAreaJPanel extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         btnprescription = new javax.swing.JButton();
 
+        personImageLabels = new javax.swing.JLabel();
+
         setBackground(new java.awt.Color(77, 154, 115));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -177,25 +184,25 @@ public class PatientWorkAreaJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(workRequestJTable);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 110, 638, 130));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 110, 638, 130));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Patient Id:");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, -1, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 70, -1, -1));
 
         patientId.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         patientId.setForeground(new java.awt.Color(255, 255, 255));
-        add(patientId, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, 178, 20));
+        add(patientId, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 70, 178, 20));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Patient Name:");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 70, -1, -1));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 70, -1, -1));
 
         patientName.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         patientName.setForeground(new java.awt.Color(255, 255, 255));
-        add(patientName, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 60, 170, 30));
+        add(patientName, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 60, 170, 30));
 
         insTable.setBackground(new java.awt.Color(153, 255, 153));
         insTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -219,7 +226,7 @@ public class PatientWorkAreaJPanel extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(insTable);
 
-        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 640, 130));
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 290, 640, 130));
 
         jButton1.setBackground(new java.awt.Color(255, 204, 51));
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -230,12 +237,12 @@ public class PatientWorkAreaJPanel extends javax.swing.JPanel {
                 jButton1ActionPerformed(evt);
             }
         });
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 430, 140, -1));
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 440, 140, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Patients Portal");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 20, -1, -1));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, -1, -1));
 
         jButton2.setBackground(new java.awt.Color(255, 204, 51));
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -246,7 +253,8 @@ public class PatientWorkAreaJPanel extends javax.swing.JPanel {
                 jButton2ActionPerformed(evt);
             }
         });
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 430, -1, -1));
+
+        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 440, -1, -1));
 
         btnprescription.setBackground(new java.awt.Color(255, 204, 51));
         btnprescription.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -257,7 +265,9 @@ public class PatientWorkAreaJPanel extends javax.swing.JPanel {
                 btnprescriptionActionPerformed(evt);
             }
         });
-        add(btnprescription, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 430, 160, 30));
+
+        add(btnprescription, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 440, 160, 30));
+        add(personImageLabels, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 130, 120));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -305,6 +315,19 @@ public class PatientWorkAreaJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnprescriptionActionPerformed
 
 
+    public void addImage(){
+        //        Addded by Bharat
+        String Path;
+        Path = patientId.getText()+".jpg";
+        ImageIcon icon = new ImageIcon(Path);
+        Image img = icon.getImage();
+        Image imagescaled = img.getScaledInstance(130,120,Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imagescaled);
+        personImageLabels.setIcon(scaledIcon);
+// 
+    }
+          
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnprescription;
     private javax.swing.JTable insTable;
@@ -317,6 +340,7 @@ public class PatientWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel patientId;
     private javax.swing.JLabel patientName;
+    private javax.swing.JLabel personImageLabels;
     private javax.swing.JTable workRequestJTable;
     // End of variables declaration//GEN-END:variables
 }
