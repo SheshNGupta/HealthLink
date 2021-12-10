@@ -266,6 +266,13 @@ public class ViewPatientJPanel extends javax.swing.JPanel {
         txtMedicalCondition.setText(request.getReasonForVisit());
         txtPrescription.setText(request.getPrescription());
         
+        String Path;
+        Path = txtPatientId.getText()+".jpg";
+        ImageIcon icon = new ImageIcon(Path);
+        Image img = icon.getImage();
+        Image imagescaled = img.getScaledInstance(240,240,Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imagescaled);
+        personImageLabels.setIcon(scaledIcon);
         
     }
 }
