@@ -156,7 +156,6 @@ public class PatientWorkAreaJPanel extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         btnprescription = new javax.swing.JButton();
-
         personImageLabels = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(77, 154, 115));
@@ -253,8 +252,7 @@ public class PatientWorkAreaJPanel extends javax.swing.JPanel {
                 jButton2ActionPerformed(evt);
             }
         });
-
-        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 440, -1, -1));
+        add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 440, -1, -1));
 
         btnprescription.setBackground(new java.awt.Color(255, 204, 51));
         btnprescription.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -265,8 +263,7 @@ public class PatientWorkAreaJPanel extends javax.swing.JPanel {
                 btnprescriptionActionPerformed(evt);
             }
         });
-
-        add(btnprescription, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 440, 160, 30));
+        add(btnprescription, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 440, 150, 30));
         add(personImageLabels, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 130, 120));
     }// </editor-fold>//GEN-END:initComponents
 
