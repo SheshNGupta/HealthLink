@@ -219,6 +219,7 @@ public class ManageOrganizationsJPanel extends javax.swing.JPanel {
             }
             else{
                 directory.createOrganization(type);
+                JOptionPane.showMessageDialog(null, "Organization created");
             }
         
         populateTable();

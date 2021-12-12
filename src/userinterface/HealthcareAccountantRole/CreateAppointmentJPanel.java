@@ -735,7 +735,11 @@ public class CreateAppointmentJPanel extends javax.swing.JPanel {
                 passwordJTextField.setText("");
                 rePasswordJTextField.setText("");
                 nameJTextField.setText("");
+
                 personImageLabels.setIcon(null);
+
+                jButton2.setEnabled(false);
+                jButton3.setEnabled(false);
             }
 
         }
@@ -755,6 +759,8 @@ public class CreateAppointmentJPanel extends javax.swing.JPanel {
 
         //btnCreate.setEnabled(false);
         btnUpdate.setEnabled(true);
+        jButton2.setEnabled(true);
+        jButton3.setEnabled(true);
         boolean isPatientFound = false;
         String ssn = txtPatientSSN.getText().trim();
         List<Network> networks = ecosystem.getNetworks();
@@ -968,6 +974,8 @@ public class CreateAppointmentJPanel extends javax.swing.JPanel {
                 cus.setAddress(address);
                 cus.setEmail(email);
                 btnUpdate.setEnabled(false);
+                jButton2.setEnabled(false);
+                jButton3.setEnabled(false);
                 JOptionPane.showMessageDialog(null, "Customer Information Updated Successfully!");
             }
         }
@@ -1064,7 +1072,7 @@ public class CreateAppointmentJPanel extends javax.swing.JPanel {
             Path = txtPatientIdentifier.getText()+".jpg";
             ImageIcon icon = new ImageIcon(Path);
             Image img = icon.getImage();
-            Image imagescaled = img.getScaledInstance(240,240,Image.SCALE_SMOOTH);
+            Image imagescaled = img.getScaledInstance(180,160,Image.SCALE_SMOOTH);
             ImageIcon scaledIcon = new ImageIcon(imagescaled);
             personImageLabels.setIcon(scaledIcon);
 //          personImageLabels.setIcon(new javax.swing.ImageIcon((txtFirstName.getText()+txtLastName.getText()+".jpg" )));
@@ -1270,9 +1278,15 @@ public class CreateAppointmentJPanel extends javax.swing.JPanel {
         txtAge.setText(patient.getAge());
         txtAddress.setText(patient.getAddress());
         emailTextField.setText(patient.getEmail());
+        try{
         nameJTextField.setText(patient.getUserAccount().getUsername());
         passwordJTextField.setText(patient.getUserAccount().getPassword());
         rePasswordJTextField.setText(patient.getUserAccount().getPassword());
+        }catch(Exception exc){
+            nameJTextField.setEnabled(false);
+            passwordJTextField.setEnabled(false);
+            rePasswordJTextField.setEnabled(false);
+        }
         
 //        Addded by Bharat
         String Path;

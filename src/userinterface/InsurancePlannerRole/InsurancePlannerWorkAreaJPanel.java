@@ -244,6 +244,7 @@ public class InsurancePlannerWorkAreaJPanel extends javax.swing.JPanel {
             monthlyPremium = Double.parseDouble(monthlyPremiumTxt);
         } catch (NumberFormatException ne) {
             JOptionPane.showMessageDialog(null, "Please enter numeric values for monthly premium");
+            return;
         }
 
         List<Insurance> policies = insuranceCompanyEnterprise.getInsurancePolicyDirectory().getPolicies();

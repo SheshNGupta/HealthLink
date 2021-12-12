@@ -99,6 +99,7 @@ public class EnterpriseAdminWorkAreaJPanel extends javax.swing.JPanel {
         add(enterpriseLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 140, 30));
 
         valueLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        valueLabel.setForeground(new java.awt.Color(255, 255, 255));
         add(valueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 70, 130, 30));
 
         btnRequestFunds.setBackground(new java.awt.Color(255, 153, 0));
