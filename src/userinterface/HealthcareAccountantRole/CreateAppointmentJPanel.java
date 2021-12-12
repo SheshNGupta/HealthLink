@@ -1069,7 +1069,7 @@ public class CreateAppointmentJPanel extends javax.swing.JPanel {
             Path = txtPatientIdentifier.getText()+".jpg";
             ImageIcon icon = new ImageIcon(Path);
             Image img = icon.getImage();
-            Image imagescaled = img.getScaledInstance(240,240,Image.SCALE_SMOOTH);
+            Image imagescaled = img.getScaledInstance(180,160,Image.SCALE_SMOOTH);
             ImageIcon scaledIcon = new ImageIcon(imagescaled);
             personImageLabels.setIcon(scaledIcon);
 //          personImageLabels.setIcon(new javax.swing.ImageIcon((txtFirstName.getText()+txtLastName.getText()+".jpg" )));
