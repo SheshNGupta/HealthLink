@@ -373,15 +373,15 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
                     }
                 }
            dataset.addValue( counttreat , net.getName() , "Visit_Completed" );
-           dataset.addValue( countprogress , net.getName() , "VIsit_In_progress" );
+           dataset.addValue( countprogress , net.getName() , "VIsit_Not_Completed" );
            dataset.addValue( billcomplete , net.getName() , "Billing_Completed" );
-           dataset.addValue( billprogress , net.getName() , "Billing_In_progress" );
+           dataset.addValue( billprogress , net.getName() , "Billing_Not_Completed" );
            dataset.addValue( inscomplete , net.getName() , "Claim_Completed" );
-           dataset.addValue( insprogress , net.getName() , "Claim_In_progress" );
+           dataset.addValue( insprogress , net.getName() , "Claim_Not_Completed" );
            dataset.addValue( fundscomplete , net.getName() , "Funds_Completed" );
-           dataset.addValue( fundsprogress , net.getName() , "Funds_In_progress" );
+           dataset.addValue( fundsprogress , net.getName() , "Funds_Not_Completed" );
            dataset.addValue( ordercomplete , net.getName() , "Orders_Completed" );
-           dataset.addValue( orderprogress , net.getName() , "Orders_In_progress" );
+           dataset.addValue( orderprogress , net.getName() , "Orders_Not_Completed" );
            //dataset.addValue( labcomplete , net.getName() , "Lab_Completed" );
            //dataset.addValue( labprogress , net.getName() , "Lab_In_progress" );
            counttreat=0;

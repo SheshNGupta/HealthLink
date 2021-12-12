@@ -258,6 +258,8 @@ public class ManageMenuJPanel extends javax.swing.JPanel {
             menuItem.remove(item);
             //enterprise.getOrganizationDirectory().getOrganizations().remove(organization);
             populateTable();
+            JOptionPane.showMessageDialog(null, "Item deleted!");
+            
         }
        
     }//GEN-LAST:event_btnDeleteOrgActionPerformed
