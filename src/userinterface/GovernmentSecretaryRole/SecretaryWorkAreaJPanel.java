@@ -126,7 +126,7 @@ public class SecretaryWorkAreaJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(213, 213, 213)
                         .addComponent(btnAssign)
-                        .addGap(38, 38, 38)
+                        .addGap(60, 60, 60)
                         .addComponent(processRequestBtn)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );

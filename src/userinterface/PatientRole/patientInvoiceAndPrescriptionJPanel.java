@@ -144,7 +144,7 @@ public class patientInvoiceAndPrescriptionJPanel extends javax.swing.JPanel {
                 btnPrintActionPerformed(evt);
             }
         });
-        invoicejPanel.add(btnPrint, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 340, 92, -1));
+        invoicejPanel.add(btnPrint, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 290, 92, -1));
 
         btnBack.setBackground(new java.awt.Color(255, 204, 51));
         btnBack.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N

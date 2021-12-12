@@ -148,7 +148,7 @@ public class patientPrescriptionJPanel extends javax.swing.JPanel {
                 btnPrintPActionPerformed(evt);
             }
         });
-        jPanelPrescription.add(btnPrintP, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 330, 88, -1));
+        jPanelPrescription.add(btnPrintP, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 330, 88, -1));
 
         btnback.setBackground(new java.awt.Color(255, 204, 51));
         btnback.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -168,7 +168,9 @@ public class patientPrescriptionJPanel extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelPrescription, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanelPrescription, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
