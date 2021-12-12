@@ -735,6 +735,8 @@ public class CreateAppointmentJPanel extends javax.swing.JPanel {
                 passwordJTextField.setText("");
                 rePasswordJTextField.setText("");
                 nameJTextField.setText("");
+                jButton2.setEnabled(false);
+                jButton3.setEnabled(false);
             }
 
         }
@@ -754,6 +756,8 @@ public class CreateAppointmentJPanel extends javax.swing.JPanel {
 
         //btnCreate.setEnabled(false);
         btnUpdate.setEnabled(true);
+        jButton2.setEnabled(true);
+        jButton3.setEnabled(true);
         boolean isPatientFound = false;
         String ssn = txtPatientSSN.getText().trim();
         List<Network> networks = ecosystem.getNetworks();
@@ -967,6 +971,8 @@ public class CreateAppointmentJPanel extends javax.swing.JPanel {
                 cus.setAddress(address);
                 cus.setEmail(email);
                 btnUpdate.setEnabled(false);
+                jButton2.setEnabled(false);
+                jButton3.setEnabled(false);
                 JOptionPane.showMessageDialog(null, "Customer Information Updated Successfully!");
             }
         }
