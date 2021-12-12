@@ -735,6 +735,7 @@ public class CreateAppointmentJPanel extends javax.swing.JPanel {
                 passwordJTextField.setText("");
                 rePasswordJTextField.setText("");
                 nameJTextField.setText("");
+                personImageLabels.setIcon(null);
             }
 
         }
