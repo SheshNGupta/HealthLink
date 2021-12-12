@@ -413,7 +413,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         final NumberAxis rangeAxis = (NumberAxis) plot.getRangeAxis();
         rangeAxis.setStandardTickUnits(NumberAxis.createIntegerTickUnits());
         //plot chart
-        ChartFrame frame = new ChartFrame("Appointment Status bar", chart);
+        ChartFrame frame = new ChartFrame("HealthLink Status ", chart);
         
         frame.setVisible(true);
         frame.setSize(1000,700);
