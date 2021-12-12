@@ -318,6 +318,7 @@ public class ProcessMedicalBillingsJPanel extends javax.swing.JPanel {
                 request.setReceiver(userAccount);
                 request.setStatus("Pending on Accountant");
                 populateTable();
+                JOptionPane.showMessageDialog(null, "Request succesfully assigned to you!");
 //             else {
 //                JOptionPane.showMessageDialog(null, "Can't assign this work request, as the work request is in " + request.getStatus() + " status");
 //            }
