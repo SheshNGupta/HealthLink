@@ -177,7 +177,7 @@ public class PatientPlanVisitJPanel extends javax.swing.JPanel {
                 dirBtnActionPerformed(evt);
             }
         });
-        add(dirBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 320, -1, -1));
+        add(dirBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 320, -1, -1));
 
         emailBtn.setBackground(new java.awt.Color(255, 204, 51));
         emailBtn.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -188,7 +188,7 @@ public class PatientPlanVisitJPanel extends javax.swing.JPanel {
                 emailBtnActionPerformed(evt);
             }
         });
-        add(emailBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 320, -1, -1));
+        add(emailBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 320, -1, -1));
 
         webBtn.setBackground(new java.awt.Color(255, 204, 51));
         webBtn.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -199,7 +199,7 @@ public class PatientPlanVisitJPanel extends javax.swing.JPanel {
                 webBtnActionPerformed(evt);
             }
         });
-        add(webBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 320, -1, -1));
+        add(webBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 320, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
