@@ -14,12 +14,10 @@ import com.twilio.type.PhoneNumber;
  */
 public class SMS {
     
-    //public static final String ACCOUNT_SID = System.getenv("TWILIO_ACCOUNT_SID");
-    //public static final String AUTH_TOKEN = System.getenv("TWILIO_AUTH_TOKEN");
+    public static final String ACCOUNT_SID = System.getenv("TWILIO_ACCOUNT_SID");
+    public static final String AUTH_TOKEN = System.getenv("TWILIO_AUTH_TOKEN");
 
     public static void SendSMS(String to, String msg){
-        final String ACCOUNT_SID = "ACc96e97c5c585f0ed3073888c5dbebd82";
-        final String AUTH_TOKEN = "b8cb1cce7ae39a9b53429d95d1e10083";
         Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
         Message message = Message.creator(
                 new com.twilio.type.PhoneNumber(to),
