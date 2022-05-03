@@ -61,7 +61,7 @@ public abstract class Enterprise extends Organization {
         this.enterpriseType = type;
         this.zipcode = zip;
         this.address = address;
-        this.email = "gupta.shes@northeastern.edu";
+        this.email = "";
         organizationDirectory = new OrganizationDirectory();
     }
 
