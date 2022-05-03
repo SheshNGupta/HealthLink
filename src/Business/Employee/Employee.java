@@ -18,7 +18,7 @@ public class Employee {
     public Employee() {
         id = count;
         count++;
-        this.email="gupta.shes@northeastern.edu";
+        this.email="";
     }
 
     public int getId() {
